@@ -7,208 +7,775 @@
   <meta name="description" content="Guest guide for Refúgio Icaraí. Check-in, Wi‑Fi, rules, restaurants, beaches and local tips.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* Palette variables (updated as requested: softer beige / pastels / light brown) */
-    :root{
-      --orange: #B07A43;    /* Accent / titles / buttons - warm light brown */
-      --blue: #A68A6B;      /* Primary elements, links, icons - muted warm brown */
-      --blue-light: #F6EFE6;/* Very light cream - soft backgrounds / hover */
-      --blue-gray: #E3D8C6; /* Subtle beige-gray - dividers / soft details */
-      --white: #FFFFFF;     /* White - main background */
-      --muted: #3B2E26;     /* Darker brown for readable text */
-      --red: #B05A47;       /* Accent red / terracotta */
+    /* ============================
+       DESIGN SYSTEM - Modern Luxury
+       ============================ */
+    :root {
+      /* Core palette - warm earth tones */
+      --orange: #B07A43;
+      --orange-light: #C99D6A;
+      --orange-dark: #8E5A2E;
+      --blue: #A68A6B;
+      --blue-light: #F6EFE6;
+      --blue-gray: #E3D8C6;
+      --white: #FFFFFF;
+      --cream: #FAF7F2;
+      --muted: #3B2E26;
+      --muted-light: #6B5D52;
+      --red: #B05A47;
+      
+      /* Gradients */
+      --gradient-warm: linear-gradient(135deg, #B07A43 0%, #C99D6A 50%, #A68A6B 100%);
+      --gradient-cream: linear-gradient(180deg, #FAF7F2 0%, #F6EFE6 100%);
+      --gradient-card: linear-gradient(145deg, rgba(166,138,107,0.95) 0%, rgba(142,90,46,0.9) 100%);
+      --gradient-glass: linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(246,239,230,0.8) 100%);
+      
+      /* Shadows */
+      --shadow-sm: 0 2px 8px rgba(59,46,38,0.06);
+      --shadow-md: 0 8px 24px rgba(59,46,38,0.1);
+      --shadow-lg: 0 16px 48px rgba(59,46,38,0.12);
+      --shadow-xl: 0 24px 64px rgba(59,46,38,0.16);
+      --shadow-glow: 0 0 40px rgba(176,122,67,0.2);
+      
+      /* Typography */
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+      
+      /* Spacing */
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+      
+      /* Transitions */
+      --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+      --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
+    /* ============================
+       BASE STYLES
+       ============================ */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { overflow-y: scroll; }
+    
+    html { 
+      overflow-y: scroll; 
+      scroll-behavior: smooth;
+    }
+    
     body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--white);
+      font-family: var(--font-sans);
+      background: var(--gradient-cream);
       color: var(--muted);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
-    .font-serif { font-family: 'Playfair Display', serif; }
 
+    /* ============================
+       HEADER
+       ============================ */
     header {
       position: sticky;
       top: 0;
       z-index: 50;
-      background-color: var(--white);
-      border-bottom: 1px solid var(--blue-gray);
       width: 100%;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(227,216,198,0.5);
+      transition: box-shadow 0.3s var(--ease-smooth);
     }
+    
+    header.scrolled {
+      box-shadow: var(--shadow-md);
+    }
+    
     header .header-inner {
-      max-width: 42rem;
+      max-width: 44rem;
       margin: 0 auto;
-      padding: 1.5rem;
+      padding: 1.25rem 1.5rem;
       display: grid;
-      grid-template-columns: 40px 1fr 160px;
+      grid-template-columns: 48px 1fr 150px;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.75rem;
     }
 
-    /* Language switch buttons container */
+    /* Language switch */
     .lang-switch {
       display: inline-flex;
-      gap: 0.5rem;
+      gap: 0.375rem;
       justify-self: center;
+      background: rgba(166,138,107,0.08);
+      padding: 4px;
+      border-radius: 12px;
     }
+    
     .lang-switch button {
       background: transparent;
-      border: 1px solid rgba(166,138,107,0.15);
-      color: var(--blue);
-      padding: 0.35rem 0.6rem;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background-color 0.18s, color 0.18s, border-color 0.18s;
-      font-size: 0.875rem;
-    }
-    .lang-switch button[aria-pressed="true"] {
-      background: var(--blue);
-      color: var(--white);
-      border-color: var(--blue);
-    }
-
-    header button#menuBtn {
-      background: none;
       border: none;
       color: var(--blue);
-      padding: 0.5rem;
+      padding: 0.5rem 0.875rem;
+      border-radius: 8px;
       cursor: pointer;
-      border-radius: 50%;
-      transition: background-color 0.2s;
+      font-weight: 600;
+      font-size: 0.8125rem;
+      letter-spacing: 0.02em;
+      transition: all 0.25s var(--ease-smooth);
+    }
+    
+    .lang-switch button:hover {
+      background: rgba(166,138,107,0.1);
+    }
+    
+    .lang-switch button[aria-pressed="true"] {
+      background: var(--gradient-warm);
+      color: var(--white);
+      box-shadow: 0 2px 8px rgba(176,122,67,0.3);
+    }
+
+    /* Menu button */
+    header button#menuBtn {
+      background: var(--blue-light);
+      border: none;
+      color: var(--blue);
+      padding: 0;
+      cursor: pointer;
+      border-radius: 14px;
+      transition: all 0.25s var(--ease-smooth);
       justify-self: center;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 40px;
-      height: 40px;
+      width: 48px;
+      height: 48px;
     }
-    header button#menuBtn:hover { background-color: var(--blue-light); }
+    
+    header button#menuBtn:hover { 
+      background: var(--blue-gray);
+      transform: scale(1.05);
+    }
 
-    .header-spacer { width: 40px; height: 40px; justify-self: center; }
-
-    header span {
+    header span#headerTitle {
       justify-self: center;
       text-align: center;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-size: 0.875rem;
-      font-weight: 700;
+      letter-spacing: 0.2em;
+      font-size: 0.75rem;
+      font-weight: 600;
       color: var(--orange);
     }
 
-    .icon { width: 24px; height: 24px; stroke: currentColor; stroke-width: 1.5; fill: none; color: var(--blue); }
-    .icon-lg { width: 32px; height: 32px; }
-    .icon-xl { width: 64px; height: 64px; }
+    /* ============================
+       ICONS
+       ============================ */
+    .icon { 
+      width: 24px; 
+      height: 24px; 
+      stroke: currentColor; 
+      stroke-width: 1.75; 
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .icon-lg { width: 28px; height: 28px; }
+    .icon-xl { width: 48px; height: 48px; }
 
-    .section { display: none; padding: 2rem 1.5rem; max-width: 42rem; width: 100%; margin: 0 auto; }
+    /* ============================
+       SECTIONS
+       ============================ */
+    .section { 
+      display: none; 
+      padding: 2.5rem 1.5rem 3rem; 
+      max-width: 44rem; 
+      width: 100%; 
+      margin: 0 auto;
+      animation: fadeIn 0.4s var(--ease-smooth);
+    }
+    
     .section.active { display: block; }
-    .section h2 { font-size: 1.875rem; font-weight: 700; margin-bottom: 1rem; text-align: center; color: var(--orange); }
-    .section p { line-height: 1.7; margin-bottom: 1rem; color: var(--muted); }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .section h2 { 
+      font-family: var(--font-serif);
+      font-size: 2.25rem; 
+      font-weight: 600; 
+      margin-bottom: 1.5rem; 
+      text-align: center; 
+      color: var(--orange);
+      letter-spacing: -0.02em;
+    }
+    
+    .section p { 
+      line-height: 1.8; 
+      margin-bottom: 1rem; 
+      color: var(--muted);
+    }
 
-    .home-section { display: none; min-height: calc(100vh - 80px); width: 100%; max-width: 42rem; margin: 0 auto; }
-    .home-section.active { display: flex; flex-direction: column; justify-content: center; align-items: center; }
+    /* ============================
+       HOME SECTION
+       ============================ */
+    .home-section { 
+      display: none; 
+      min-height: calc(100vh - 80px); 
+      width: 100%; 
+      max-width: 44rem; 
+      margin: 0 auto;
+    }
+    
+    .home-section.active { 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: center; 
+      align-items: center;
+    }
 
-    .home-content { display:flex; flex-direction:column; align-items:center; padding:2rem 1rem; width:100%; }
-    .home-content h1 { font-size: 2.5rem; font-weight:700; margin-bottom:0.5rem; text-align:center; font-style: italic; color:var(--orange); }
-    .home-content .subtitle { font-size:0.75rem; text-transform:uppercase; letter-spacing:0.2em; opacity:0.9; margin-bottom:2rem; text-align:center; color:var(--blue); }
+    .home-content { 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      padding: 2rem 1.5rem; 
+      width: 100%;
+      animation: fadeIn 0.5s var(--ease-smooth);
+    }
+    
+    .home-content h1 { 
+      font-family: var(--font-serif);
+      font-size: 3.5rem; 
+      font-weight: 400;
+      font-style: italic;
+      margin-bottom: 0.75rem; 
+      text-align: center; 
+      color: var(--orange);
+      letter-spacing: -0.02em;
+      text-shadow: 0 2px 20px rgba(176,122,67,0.15);
+    }
+    
+    .home-content .subtitle { 
+      font-size: 0.6875rem; 
+      text-transform: uppercase; 
+      letter-spacing: 0.35em; 
+      opacity: 0.85; 
+      margin-bottom: 2.5rem; 
+      text-align: center; 
+      color: var(--muted-light);
+      font-weight: 500;
+    }
 
-    .menu-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; width:100%; max-width:400px; margin:0 auto; }
-    .menu-item { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1rem; background-color: var(--blue); border: 2px solid rgba(166,138,107,0.06); border-radius: 1rem; cursor:pointer; transition: background-color 0.18s, transform 0.12s; aspect-ratio:1; color: var(--white); }
-    .menu-item:hover { background-color: var(--blue-gray); transform: translateY(-3px); color: var(--white); }
-    .menu-item svg { color: var(--white); margin-bottom: 0.5rem; }
-    .menu-item span { font-size:0.625rem; text-align:center; line-height:1.3; font-weight:600; text-transform:uppercase; color:var(--white); }
+    /* ============================
+       MENU GRID
+       ============================ */
+    .menu-grid { 
+      display: grid; 
+      grid-template-columns: repeat(3, 1fr); 
+      gap: 1rem; 
+      width: 100%; 
+      max-width: 420px; 
+      margin: 0 auto;
+    }
+    
+    .menu-item { 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      justify-content: center; 
+      padding: 1.25rem 0.75rem;
+      background: var(--gradient-card);
+      border: none;
+      border-radius: var(--radius-lg); 
+      cursor: pointer; 
+      transition: all 0.35s var(--ease-smooth);
+      aspect-ratio: 1;
+      color: var(--white);
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .menu-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s var(--ease-smooth);
+    }
+    
+    .menu-item:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: var(--shadow-xl), var(--shadow-glow);
+    }
+    
+    .menu-item:hover::before {
+      opacity: 1;
+    }
+    
+    .menu-item:active {
+      transform: translateY(-2px) scale(0.98);
+    }
+    
+    .menu-item svg { 
+      color: var(--white);
+      margin-bottom: 0.625rem;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+    }
+    
+    .menu-item .menu-label { 
+      font-size: 0.5625rem; 
+      text-align: center; 
+      line-height: 1.4; 
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--white);
+    }
 
-    .contact-btn { margin-top:2rem; width:100%; max-width:400px; background-color: var(--blue-light); color: var(--orange); padding:1rem; border:none; border-radius:9999px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:0.5rem; transition: opacity 0.2s, transform 0.12s; border: 2px solid rgba(176,122,67,0.12); }
-    .contact-btn:hover { opacity:0.95; transform: translateY(-2px); }
+    /* ============================
+       CONTACT BUTTON
+       ============================ */
+    .contact-btn { 
+      margin-top: 2.5rem; 
+      width: 100%; 
+      max-width: 420px;
+      background: var(--white);
+      color: var(--orange);
+      padding: 1.125rem 2rem;
+      border: 2px solid rgba(176,122,67,0.2);
+      border-radius: 100px;
+      font-weight: 700;
+      font-size: 0.875rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      transition: all 0.3s var(--ease-smooth);
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .contact-btn:hover { 
+      background: var(--gradient-warm);
+      color: var(--white);
+      border-color: transparent;
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+    }
 
-    footer { margin-top:2rem; text-align:center; font-size:0.875rem; color:var(--blue-gray); }
+    /* ============================
+       FOOTER
+       ============================ */
+    footer { 
+      margin-top: 2.5rem; 
+      text-align: center; 
+      font-size: 0.8125rem;
+      color: var(--muted-light);
+      opacity: 0.7;
+    }
 
-    .card { background-color: var(--blue); padding:1rem; border-radius:0.75rem; margin-bottom:0.75rem; color: var(--white); border: 1px solid rgba(166,138,107,0.08); }
-    .card-lg { padding:1.5rem; border-radius:1rem; margin-bottom:1.5rem; }
-    .card h3 { font-size:1.25rem; font-weight:700; margin-bottom:0.75rem; color: var(--white); }
+    /* ============================
+       CARDS
+       ============================ */
+    .card { 
+      background: var(--gradient-card);
+      padding: 1.25rem 1.5rem;
+      border-radius: var(--radius-md);
+      margin-bottom: 1rem;
+      color: var(--white);
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s var(--ease-smooth);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    }
+    
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .card-lg { 
+      padding: 1.75rem 2rem;
+      border-radius: var(--radius-lg);
+      margin-bottom: 1.25rem;
+    }
+    
+    .card h3 { 
+      font-family: var(--font-serif);
+      font-size: 1.375rem;
+      font-weight: 600;
+      margin-bottom: 0.875rem;
+      color: var(--white);
+    }
 
-    .card .title { font-weight:700; color: var(--white); }
-    .card .desc { font-size:0.875rem; opacity:0.95; margin-top:0.25rem; color: var(--white); }
-    .card .time { font-size:0.75rem; opacity:0.9; margin-top:0.25rem; color: var(--white); }
+    .card .title { 
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--white);
+    }
+    
+    .card .desc { 
+      font-size: 0.9375rem;
+      opacity: 0.92;
+      margin-top: 0.375rem;
+      color: var(--white);
+      line-height: 1.6;
+    }
+    
+    .card .time { 
+      font-size: 0.8125rem;
+      opacity: 0.85;
+      margin-top: 0.375rem;
+      color: var(--white);
+    }
 
-    .badge { font-size:0.75rem; background-color: var(--blue-gray); padding:0.25rem 0.5rem; border-radius:9999px; color:var(--white); }
-    .badge-inline { display:inline-block; margin-top:0.25rem; }
+    /* ============================
+       BADGES
+       ============================ */
+    .badge { 
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      padding: 0.375rem 0.75rem;
+      border-radius: 100px;
+      color: var(--white);
+    }
+    
+    .badge.highlight {
+      background: var(--white);
+      color: var(--orange);
+    }
 
-    ul, ol { margin-left:1.5rem; margin-top:0.5rem; color: var(--muted); }
-    li { margin-bottom:0.5rem; line-height:1.5; color: var(--muted); }
+    /* ============================
+       LISTS
+       ============================ */
+    ul, ol { 
+      margin-left: 1.75rem; 
+      margin-top: 0.75rem;
+      color: var(--muted);
+    }
+    
+    li { 
+      margin-bottom: 0.625rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
 
-    .wifi-box { text-align:center; padding:2rem; background: linear-gradient(180deg, rgba(222,214,195,0.12), rgba(191,163,138,0.06)); border-radius: 0.75rem; color: var(--blue); }
-    .wifi-box .label { font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.5rem; color:var(--blue-gray); }
-    .wifi-box .value { font-size:1.5rem; font-weight:700; margin-bottom:1.5rem; color:var(--orange); }
-    .wifi-box .value-mono { font-family: monospace; color:var(--orange); }
+    /* ============================
+       WIFI BOX
+       ============================ */
+    .wifi-box { 
+      text-align: center;
+      padding: 2.5rem 2rem;
+      background: var(--white);
+      border: 2px solid var(--blue-gray);
+      border-radius: var(--radius-xl);
+      color: var(--muted);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .wifi-box .label { 
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 0.5rem;
+      color: var(--muted-light);
+      font-weight: 600;
+    }
+    
+    .wifi-box .value { 
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1.75rem;
+      color: var(--orange);
+      letter-spacing: 0.02em;
+    }
+    
+    .wifi-box .value-mono { 
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      color: var(--orange);
+      letter-spacing: 0.1em;
+    }
 
-    .btn-accent { display:inline-block; background-color: var(--blue-light); color: var(--orange); padding:0.75rem 1.5rem; border-radius:9999px; font-weight:700; text-decoration:none; margin-top:1rem; transition: opacity 0.18s, transform 0.12s; border: 2px solid rgba(166,138,107,0.12); }
-    .btn-accent:hover { opacity:0.95; transform: translateY(-2px); }
+    /* ============================
+       BUTTONS
+       ============================ */
+    .btn-accent { 
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--white);
+      color: var(--orange);
+      padding: 1rem 2rem;
+      border-radius: 100px;
+      font-weight: 700;
+      font-size: 0.875rem;
+      text-decoration: none;
+      margin-top: 1.25rem;
+      transition: all 0.3s var(--ease-smooth);
+      border: 2px solid rgba(176,122,67,0.2);
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .btn-accent:hover { 
+      background: var(--gradient-warm);
+      color: var(--white);
+      border-color: transparent;
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+    }
 
-    .btn-card { display:block; width:100%; background-color: var(--orange); color: var(--white); padding:1rem; border-radius:9999px; font-weight:700; text-decoration:none; text-align:center; margin-top:0.75rem; transition: background-color 0.18s, transform 0.12s; border: 2px solid rgba(176,122,67,0.06); }
-    .btn-card:hover { background-color: #8E5A2E; transform: translateY(-2px); }
+    .btn-card { 
+      display: block;
+      width: 100%;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      color: var(--white);
+      padding: 0.875rem 1.5rem;
+      border-radius: 100px;
+      font-weight: 700;
+      font-size: 0.8125rem;
+      text-decoration: none;
+      text-align: center;
+      margin-top: 1rem;
+      transition: all 0.25s var(--ease-smooth);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .btn-card:hover { 
+      background: var(--white);
+      color: var(--orange);
+      transform: translateY(-2px);
+    }
 
-    .contact-link { display:flex; align-items:center; gap:1rem; background-color: var(--blue); padding:1rem; border-radius:0.75rem; margin-bottom:0.75rem; text-decoration:none; color:var(--white); transition: background-color 0.18s, transform 0.12s; border: 1px solid rgba(166,138,107,0.08); }
-    .contact-link:hover { background-color: var(--blue-gray); transform: translateY(-2px); }
+    /* ============================
+       CONTACT LINKS
+       ============================ */
+    .contact-link { 
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      background: var(--gradient-card);
+      padding: 1.25rem 1.5rem;
+      border-radius: var(--radius-lg);
+      margin-bottom: 1rem;
+      text-decoration: none;
+      color: var(--white);
+      transition: all 0.3s var(--ease-smooth);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .contact-link:hover { 
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: var(--shadow-xl), var(--shadow-glow);
+    }
 
-    .contact-icon { width:3rem; height:3rem; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.25rem; color:var(--white); background: linear-gradient(180deg, var(--blue), var(--blue-gray)); }
-    .contact-icon.whatsapp { background: linear-gradient(180deg, var(--orange), var(--blue)); color: var(--white); }
+    .contact-icon { 
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      background: rgba(255,255,255,0.2);
+      flex-shrink: 0;
+    }
+    
+    .contact-icon.whatsapp { 
+      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    }
 
-    .flex-between { display:flex; justify-content: space-between; align-items:flex-start; gap: 0.5rem; }
+    /* ============================
+       UTILITIES
+       ============================ */
+    .flex-between { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: flex-start; 
+      gap: 0.75rem;
+    }
+    
+    .text-center { text-align: center; }
+    .text-sm { font-size: 0.9375rem; }
+    .text-xs { font-size: 0.8125rem; }
+    .opacity-80 { opacity: 0.8; }
+    .opacity-70 { opacity: 0.7; }
+    .mt-4 { margin-top: 1rem; }
+    .mt-6 { margin-top: 1.5rem; }
+    .mb-4 { margin-bottom: 1rem; }
+    .pt-6 { padding-top: 1.5rem; }
+    .border-t { border-top: 1px solid var(--blue-gray); }
+    
+    .subtitle {
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--orange);
+      margin: 2rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--blue-gray);
+    }
 
-    .mobile-menu { display:none; position:fixed; inset:0; background-color: rgba(255,255,255,0.98); z-index:40; padding-top:4rem; overflow:auto; color:var(--muted); }
-    .mobile-menu.active { display:block; }
-    .mobile-menu-content { padding:1rem; }
-    .mobile-menu-item { display:flex; align-items:center; gap:1rem; width:100%; padding:1rem; background-color: var(--blue); border:none; border-radius:0.75rem; color:var(--white); cursor:pointer; margin-bottom:0.5rem; transition: background-color 0.18s; font-size:0.875rem; font-weight:600; }
-    .mobile-menu-item:hover { background-color: var(--blue-gray); color:var(--white); }
-    .mobile-menu-item.accent { background-color: var(--blue-light); color:var(--orange); border:1px solid rgba(176,122,67,0.06); }
+    /* ============================
+       MOBILE MENU
+       ============================ */
+    .mobile-menu { 
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 40;
+      padding-top: 5rem;
+      overflow: auto;
+    }
+    
+    .mobile-menu.active { 
+      display: block;
+      animation: slideIn 0.3s var(--ease-smooth);
+    }
+    
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .mobile-menu-content { 
+      padding: 1.25rem;
+      max-width: 28rem;
+      margin: 0 auto;
+    }
+    
+    .mobile-menu-item { 
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+      padding: 1rem 1.25rem;
+      background: var(--gradient-card);
+      border: none;
+      border-radius: var(--radius-md);
+      color: var(--white);
+      cursor: pointer;
+      margin-bottom: 0.625rem;
+      transition: all 0.25s var(--ease-smooth);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .mobile-menu-item:hover { 
+      transform: translateX(4px);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .mobile-menu-item.accent { 
+      background: var(--white);
+      color: var(--orange);
+      border: 2px solid rgba(176,122,67,0.2);
+    }
 
-    .text-center { text-align:center; }
-    .text-sm { font-size:0.875rem; }
-    .text-xs { font-size:0.75rem; }
+    /* ============================
+       CAROUSEL
+       ============================ */
+    .single-carousel {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin: 1.5rem 0 2rem;
+    }
 
-    .opacity-80 { opacity:0.8; color:var(--muted); }
-    .opacity-70 { opacity:0.7; color:var(--muted); }
+    .single-carousel img {
+      width: 100%;
+      max-width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-xl);
+      transition: opacity 0.6s var(--ease-smooth);
+    }
 
-    .mt-4 { margin-top:1rem; }
-    .mt-6 { margin-top:1.5rem; }
-    .mb-4 { margin-bottom:1rem; }
-    .pt-6 { padding-top:1.5rem; }
-    .border-t { border-top: 1px solid rgba(191,163,138,0.15); }
+    /* ============================
+       LANGUAGE BLOCKS
+       ============================ */
+    .lang { display: none !important; }
+    .lang-active { display: block !important; }
 
-    /* IMPORTANT: ensure language blocks never display mixed content */
-    .lang { display: none !important; }           /* always hidden by default */
-    .lang-active { display: block !important; }    /* only selected language uses this */
-
+    /* ============================
+       RESPONSIVE
+       ============================ */
     @media (min-width: 768px) {
-      .home-content h1 { font-size: 3rem; }
+      .home-content h1 { font-size: 4.5rem; }
+      .menu-grid { gap: 1.25rem; }
+      .menu-item { padding: 1.5rem 1rem; }
+      .menu-item .menu-label { font-size: 0.625rem; }
+      .single-carousel img { height: 400px; }
     }
 
     @media (max-width: 767px) {
-      .section { padding: 1.25rem 1rem; text-align: center; }
-      .card, .card-lg { margin-left:auto; margin-right:auto; max-width:100%; text-align:center; }
-      .flex-between { flex-direction: column; align-items: center; gap: 0.5rem; }
-      .menu-grid { max-width: 360px; margin: 0 auto; }
-      .menu-item { padding: 0.9rem; }
-      .menu-item span { font-size: 0.625rem; }
-      .home-content h1 { font-size: 2rem; }
-      .wifi-box .value { font-size: 1.25rem; }
-      .contact-link { justify-content:center; text-align:center; }
-      .contact-btn { width: calc(100% - 2rem); max-width: 420px; margin-left:auto; margin-right:auto; }
+      .section { padding: 1.5rem 1rem 2rem; text-align: center; }
+      .card, .card-lg { margin-left: auto; margin-right: auto; max-width: 100%; text-align: center; }
+      .flex-between { flex-direction: column; align-items: center; gap: 0.625rem; }
+      .menu-grid { max-width: 340px; gap: 0.75rem; }
+      .menu-item { padding: 1rem 0.5rem; }
+      .menu-item .menu-label { font-size: 0.5rem; }
+      .home-content h1 { font-size: 2.5rem; }
+      .wifi-box .value { font-size: 1.375rem; }
+      .contact-link { justify-content: center; text-align: center; flex-direction: column; gap: 0.75rem; }
+      .contact-btn { width: calc(100% - 2rem); max-width: 380px; }
       footer { padding-bottom: 2rem; }
-      header .header-inner { grid-template-columns: 36px 1fr 120px; padding: 0.75rem; }
-      header button { width: 36px; height: 36px; }
-      .header-spacer { width: 36px; height: 36px; }
-      .photo-grid { grid-template-columns: repeat(2, 1fr); max-width: 320px; }
-      .section-photo { max-width: 320px; aspect-ratio: 16/9; }
-      .photo-grid img { height: 72px; }
+      header .header-inner { grid-template-columns: 44px 1fr 130px; padding: 0.75rem 1rem; }
+      header button#menuBtn { width: 44px; height: 44px; }
+      .section h2 { font-size: 1.75rem; }
+      .single-carousel img { height: 220px; border-radius: var(--radius-lg); }
+    }
+    
+    @media (max-width: 380px) {
+      .lang-switch button { padding: 0.4rem 0.6rem; font-size: 0.75rem; }
+      header .header-inner { grid-template-columns: 40px 1fr 110px; }
+    }
+
+    /* ============================
+       SCROLLBAR
+       ============================ */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: var(--cream);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: var(--blue-gray);
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--blue);
     }
   </style>
 </head>
@@ -387,14 +954,9 @@
     </div>
   </section>
 
-  <!-- Full multilingual sections below: each text block duplicated in three languages (lang-en / lang-pt / lang-es).
-       Only the blocks with class "lang-active" will be visible at any time (JS enforces this),
-       preventing language mixing. -->
-
 <!-- BEM-VINDO / WELCOME / BIENVENIDO -->
 <section id="bemvindo" class="section" aria-labelledby="bemvindoTitle">
-
-  <h2 id="bemvindoTitle" class="font-serif">
+  <h2 id="bemvindoTitle">
     <span class="lang-pt lang">Bem-vindo ao seu Lar Temporário 🌿</span>
     <span class="lang-en lang">Welcome to Your Temporary Home 🌿</span>
     <span class="lang-es lang">Bienvenido a tu Hogar Temporal 🌿</span>
@@ -402,149 +964,37 @@
 
   <!-- Carousel -->
   <div class="single-carousel">
-    <img
-      id="carouselImage"
-      src="https://i.imgur.com/vPvNecS.jpeg"
-      alt="Apartamento em Icaraí - Niterói"
-    />
+    <img id="carouselImage" src="https://i.imgur.com/vPvNecS.jpeg" alt="Apartamento em Icaraí - Niterói" />
   </div>
 
   <!-- PT -->
   <div class="lang-pt lang">
     <p><strong>Seja muito bem-vindo(a)!</strong></p>
-
-    <p>
-      Este espaço foi preparado com amor e atenção aos mínimos detalhes para acolher você.
-      Que este apartamento seja um refúgio de tranquilidade, onde o tempo desacelera
-      e os momentos se transformam em doces memórias.
-    </p>
-
-    <p>
-      Aqui, cada cantinho foi pensado para que você se sinta verdadeiramente em casa.
-      Fique à vontade, respire fundo e aproveite tudo o que este ambiente especial oferece.
-    </p>
-
-    <p class="mt-4">
-      Aproveite este tempo como se o apartamento fosse seu.
-      <br />
-      <strong>Com carinho, Helena</strong>
-    </p>
+    <p>Este espaço foi preparado com amor e atenção aos mínimos detalhes para acolher você. Que este apartamento seja um refúgio de tranquilidade, onde o tempo desacelera e os momentos se transformam em doces memórias.</p>
+    <p>Aqui, cada cantinho foi pensado para que você se sinta verdadeiramente em casa. Fique à vontade, respire fundo e aproveite tudo o que este ambiente especial oferece.</p>
+    <p class="mt-4">Aproveite este tempo como se o apartamento fosse seu.<br /><strong>Com carinho, Helena</strong></p>
   </div>
 
   <!-- EN -->
   <div class="lang-en lang">
     <p><strong>Welcome!</strong></p>
-
-    <p>
-      This space was prepared with care and attention to every detail to welcome you.
-      May this apartment be a peaceful retreat, where time slows down
-      and moments turn into sweet memories.
-    </p>
-
-    <p>
-      Every corner was designed to make you feel truly at home.
-      Make yourself comfortable, take a deep breath, and enjoy this special place.
-    </p>
-
-    <p class="mt-4">
-      Enjoy this time as if the apartment were yours.
-      <br />
-      <strong>With care, Helena</strong>
-    </p>
+    <p>This space was prepared with care and attention to every detail to welcome you. May this apartment be a peaceful retreat, where time slows down and moments turn into sweet memories.</p>
+    <p>Every corner was designed to make you feel truly at home. Make yourself comfortable, take a deep breath, and enjoy this special place.</p>
+    <p class="mt-4">Enjoy this time as if the apartment were yours.<br /><strong>With care, Helena</strong></p>
   </div>
 
   <!-- ES -->
   <div class="lang-es lang">
     <p><strong>¡Bienvenido!</strong></p>
-
-    <p>
-      Este espacio fue preparado con cariño y atención a cada detalle para recibirte.
-      Que este apartamento sea un refugio de tranquilidad,
-      donde el tiempo se detiene y los momentos se convierten en bellos recuerdos.
-    </p>
-
-    <p>
-      Cada rincón fue pensado para que te sientas como en casa.
-      Relájate, respira profundo y disfruta de este lugar especial.
-    </p>
-
-    <p class="mt-4">
-      Disfruta este tiempo como si el apartamento fuera tuyo.
-      <br />
-      <strong>Con cariño, Helena</strong>
-    </p>
+    <p>Este espacio fue preparado con cariño y atención a cada detalle para recibirte. Que este apartamento sea un refugio de tranquilidad, donde el tiempo se detiene y los momentos se convierten en bellos recuerdos.</p>
+    <p>Cada rincón fue pensado para que te sientas como en casa. Relájate, respira profundo y disfruta de este lugar especial.</p>
+    <p class="mt-4">Disfruta este tiempo como si el apartamento fuera tuyo.<br /><strong>Con cariño, Helena</strong></p>
   </div>
-
 </section>
 
-<!-- Carousel CSS -->
-<style>
-  .single-carousel {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin: 25px 0;
-  }
-
-  .single-carousel img {
-    width: 90%;
-    max-width: 720px;
-    height: 360px;
-    object-fit: cover;
-    border-radius: 18px;
-    box-shadow: 0 10px 24px rgba(0,0,0,0.10);
-    transition: opacity 0.8s ease-in-out;
-  }
-
-  @media (min-width: 768px) {
-    .single-carousel img {
-      height: 420px;
-    }
-  }
-</style>
-
-<!-- Carousel JS -->
-<script>
-  const images = [
-    "https://i.imgur.com/E0AMBa4.jpeg",
-    "https://i.imgur.com/pGsj2Ax.jpeg",
-    "https://i.imgur.com/JkAHhya.jpeg",
-    "https://i.imgur.com/mvsc8zp.jpeg",
-    "https://i.imgur.com/Opjmq11.jpeg",
-    "https://i.imgur.com/qZQ4OrN.jpeg",
-    "https://i.imgur.com/VRE7oKn.jpeg",
-    "https://i.imgur.com/1kwd5bv.jpeg",
-    "https://i.imgur.com/jVoswL2.jpeg",
-    "https://i.imgur.com/xPUMFdQ.jpeg",
-    "https://i.imgur.com/DShzDAj.jpeg",
-    "https://i.imgur.com/bu5qiO1.jpeg",
-    "https://i.imgur.com/lBKQKgR.jpeg",
-    "https://i.imgur.com/4XB2pEC.jpeg",
-    "https://i.imgur.com/IZFhGpv.jpeg",
-    "https://i.imgur.com/XpJspPV.jpeg",
-    "https://i.imgur.com/HJwJSw7.jpeg",
-    "https://i.imgur.com/ubSyG3g.jpeg"
-  ];
-  
-  let currentIndex = 0;
-  const img = document.getElementById("carouselImage");
-
-  if (img) {
-    setInterval(() => {
-      img.style.opacity = 0;
-
-      setTimeout(() => {
-        currentIndex = (currentIndex + 1) % images.length;
-        img.src = images[currentIndex];
-        img.style.opacity = 1;
-      }, 400);
-    }, 3500);
-  }
-</script>
-
- <!-- DIRECTIONS / INSTRUÇÕES / INDICACIONES -->
+<!-- DIRECTIONS -->
 <section id="direcao" class="section" aria-labelledby="direcaoTitle">
-  <h2 id="direcaoTitle" class="font-serif">
+  <h2 id="direcaoTitle">
     <span class="lang-en lang">Directions</span>
     <span class="lang-pt lang">Instruções de Direção</span>
     <span class="lang-es lang">Indicaciones de Ruta</span>
@@ -592,9 +1042,7 @@
     <p class="mt-6"><strong>⏱️ Estimated time:</strong> 35–60 minutes (SDU) | 45–75 minutes (GIG).</p>
     <p class="mt-6"><strong>💡 Tip:</strong> Use Google Maps or Waze for real-time navigation.</p>
 
-    <a href="https://www.google.com/maps/search/?api=1&query=Rua+Cinco+de+Julho+215+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" rel="noopener noreferrer" class="btn-accent">
-      Open in Google Maps
-    </a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Rua+Cinco+de+Julho+215+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" rel="noopener noreferrer" class="btn-accent">Open in Google Maps</a>
   </div>
 
   <!-- PT -->
@@ -639,9 +1087,7 @@
     <p class="mt-6"><strong>⏱️ Tempo estimado:</strong> 35–60 min (SDU) | 45–75 min (GIG).</p>
     <p class="mt-6"><strong>💡 Dica:</strong> Recomendamos o uso do Google Maps ou Waze.</p>
 
-    <a href="https://www.google.com/maps/search/?api=1&query=Rua+Cinco+de+Julho+215+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" rel="noopener noreferrer" class="btn-accent">
-      Abrir no Google Maps
-    </a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Rua+Cinco+de+Julho+215+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" rel="noopener noreferrer" class="btn-accent">Abrir no Google Maps</a>
   </div>
 
   <!-- ES -->
@@ -686,15 +1132,13 @@
     <p class="mt-6"><strong>⏱️ Tiempo estimado:</strong> 35–60 min (SDU) | 45–75 min (GIG).</p>
     <p class="mt-6"><strong>💡 Consejo:</strong> Se recomienda usar Google Maps o Waze.</p>
 
-    <a href="https://www.google.com/maps/search/?api=1&query=Rua+Cinco+de+Julho+215+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" rel="noopener noreferrer" class="btn-accent">
-      Abrir en Google Maps
-    </a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Rua+Cinco+de+Julho+215+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" rel="noopener noreferrer" class="btn-accent">Abrir en Google Maps</a>
   </div>
 </section>
 
 <!-- CHECK-IN / CHECK-OUT -->
 <section id="checkin" class="section" aria-labelledby="checkinTitle">
-  <h2 id="checkinTitle" class="font-serif">
+  <h2 id="checkinTitle">
     <span class="lang-en lang">Check-in / Check-out</span>
     <span class="lang-pt lang">Check-in / Check-out</span>
     <span class="lang-es lang">Check-in / Check-out</span>
@@ -706,21 +1150,16 @@
       <h3>🔐 Check-in</h3>
       <p>From 3:00 PM</p>
       <p class="mt-4 text-sm opacity-80">
-        If you need to arrive earlier or later, we will be happy to be flexible whenever possible.
-        <br /><br />
-        The digital door code is unique for your stay and will be sent up to 24 hours before arrival.
-        <br /><br />
-        The external gate is accessed using a digital tag provided at check-in.
-        The building has a 24-hour front desk.
+        If you need to arrive earlier or later, we will be happy to be flexible whenever possible.<br /><br />
+        The digital door code is unique for your stay and will be sent up to 24 hours before arrival.<br /><br />
+        The external gate is accessed using a digital tag provided at check-in. The building has a 24-hour front desk.
       </p>
     </div>
 
     <div class="card card-lg">
       <h3>📝 Check-out</h3>
       <p>Until 11:00 AM</p>
-      <p class="mt-4 text-sm opacity-80">
-        Garage gates are opened using a remote control provided for your convenience.
-      </p>
+      <p class="mt-4 text-sm opacity-80">Garage gates are opened using a remote control provided for your convenience.</p>
     </div>
   </div>
 
@@ -730,23 +1169,16 @@
       <h3>🔐 Check-in</h3>
       <p>A partir das 15:00</p>
       <p class="mt-4 text-sm opacity-80">
-        Obs.: Caso precise chegar ou sair em horários diferentes, teremos prazer em flexibilizar
-        sempre que possível.
-        <br /><br />
-        A senha da porta digital é exclusiva da sua estadia e será enviada até 24 horas antes da sua chegada.
-        <br /><br />
-        O portão externo é aberto através da tag digital disponibilizada no check-in.
-        A portaria funciona 24 horas.
+        Obs.: Caso precise chegar ou sair em horários diferentes, teremos prazer em flexibilizar sempre que possível.<br /><br />
+        A senha da porta digital é exclusiva da sua estadia e será enviada até 24 horas antes da sua chegada.<br /><br />
+        O portão externo é aberto através da tag digital disponibilizada no check-in. A portaria funciona 24 horas.
       </p>
     </div>
 
     <div class="card card-lg">
       <h3>📝 Check-out</h3>
       <p>Até às 11:00</p>
-      <p class="mt-4 text-sm opacity-80">
-        Os portões da garagem são abertos por meio de controle remoto,
-        deixado para sua maior conveniência.
-      </p>
+      <p class="mt-4 text-sm opacity-80">Os portões da garagem são abertos por meio de controle remoto, deixado para sua maior conveniência.</p>
     </div>
   </div>
 
@@ -756,48 +1188,33 @@
       <h3>🔐 Check-in</h3>
       <p>A partir de las 15:00</p>
       <p class="mt-4 text-sm opacity-80">
-        Si necesita llegar o salir en horarios diferentes, estaremos encantados
-        de ser flexibles siempre que sea posible.
-        <br /><br />
-        La contraseña digital de la puerta es exclusiva para su estadía y se enviará
-        hasta 24 horas antes de su llegada.
-        <br /><br />
-        El portón externo se abre mediante una etiqueta digital proporcionada en el check-in.
-        La portería funciona las 24 horas.
+        Si necesita llegar o salir en horarios diferentes, estaremos encantados de ser flexibles siempre que sea posible.<br /><br />
+        La contraseña de la puerta digital es exclusiva de su estancia y será enviada hasta 24 horas antes de su llegada.<br /><br />
+        La puerta externa se abre con un tag digital proporcionado en el check-in. La recepción funciona 24 horas.
       </p>
     </div>
 
     <div class="card card-lg">
       <h3>📝 Check-out</h3>
       <p>Hasta las 11:00</p>
-      <p class="mt-4 text-sm opacity-80">
-        Los portones del garaje se abren mediante un control remoto
-        proporcionado para su comodidad.
-      </p>
+      <p class="mt-4 text-sm opacity-80">Las puertas del garaje se abren con un control remoto proporcionado para su comodidad.</p>
     </div>
   </div>
 </section>
 
- <!-- WI-FI -->
-<section id="wifi" class="section" aria-labelledby="wifiTitle">
-  <h2 id="wifiTitle" class="font-serif">
+<!-- WI-FI -->
+<section id="wifi" class="section">
+  <h2>
     <span class="lang-en lang">Wi-Fi</span>
     <span class="lang-pt lang">Wi-Fi</span>
     <span class="lang-es lang">Wi-Fi</span>
   </h2>
 
-  <div class="card card-lg wifi-box">
-    <svg class="icon icon-xl" style="margin:0 auto 1rem;color:var(--blue);" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M5 13a10 10 0 0 1 14 0"/>
-      <path d="M8.5 16.5a5 5 0 0 1 7 0"/>
-      <path d="M2 8.82a15 15 0 0 1 20 0"/>
-      <line x1="12" x2="12.01" y1="20" y2="20"/>
-    </svg>
-
+  <div class="wifi-box">
     <p class="label">
-      <span class="lang-en lang">Network Name</span>
-      <span class="lang-pt lang">Nome da Rede</span>
-      <span class="lang-es lang">Nombre de la red</span>
+      <span class="lang-en lang">Network</span>
+      <span class="lang-pt lang">Rede</span>
+      <span class="lang-es lang">Red</span>
     </p>
     <p class="value">vivo03#</p>
 
@@ -809,7 +1226,7 @@
     <p class="value value-mono">Bolsa123</p>
   </div>
 
-  <p class="text-center opacity-80">
+  <p class="text-center opacity-80 mt-4">
     <span class="lang-en lang">Reliable connection throughout the apartment</span>
     <span class="lang-pt lang">Conexão confiável em todo o apartamento</span>
     <span class="lang-es lang">Conexión confiable en todo el apartamento</span>
@@ -821,10 +1238,262 @@
     <span class="lang-es lang">En caso de problemas con la conexión, reinicie el router ubicado en la sala o contáctenos.</span>
   </p>
 </section>
-  
-  <!-- LUGARES PARA VISITAR -->
+
+<!-- FAQ -->
+<section id="faq" class="section" aria-labelledby="faqTitle">
+  <h2 id="faqTitle">
+    <span class="lang-pt lang">Perguntas Frequentes</span>
+    <span class="lang-en lang">Frequently Asked Questions</span>
+    <span class="lang-es lang">Preguntas Frecuentes</span>
+  </h2>
+
+  <!-- PT -->
+  <div class="lang-pt lang">
+    <div class="card">
+      <p class="title">❓ Quais são os horários de check-in e check-out?</p>
+      <p class="desc">O check-in inicia a partir das <strong>15h00</strong> e o check-out deve ser realizado até às <strong>11h00</strong>.</p>
+    </div>
+    <div class="card">
+      <p class="title">🪪 É necessário apresentar documento no check-in?</p>
+      <p class="desc">Sim. É necessário apresentar um documento original válido com foto no momento do check-in.</p>
+    </div>
+    <div class="card">
+      <p class="title">🚗 Como funciona o estacionamento?</p>
+      <p class="desc">Estacionamento privativo disponível. Utilize a vaga indicada e siga as orientações fornecidas.</p>
+    </div>
+    <div class="card">
+      <p class="title">🌙 Existe horário de silêncio?</p>
+      <p class="desc">Sim. Solicitamos silêncio e respeito aos vizinhos, especialmente das <strong>22h00 às 08h00</strong>.</p>
+    </div>
+    <div class="card">
+      <p class="title">🚭 É permitido fumar?</p>
+      <p class="desc">Não. É proibido fumar dentro do apartamento ou em áreas internas.</p>
+    </div>
+  </div>
+
+  <!-- EN -->
+  <div class="lang-en lang">
+    <div class="card">
+      <p class="title">❓ What are check-in and check-out times?</p>
+      <p class="desc">Check-in starts from <strong>3:00 PM</strong> and check-out must be completed by <strong>11:00 AM</strong>.</p>
+    </div>
+    <div class="card">
+      <p class="title">🪪 Is an ID required at check-in?</p>
+      <p class="desc">Yes. A valid photo ID is required at check-in.</p>
+    </div>
+    <div class="card">
+      <p class="title">🚗 How does parking work?</p>
+      <p class="desc">Private parking is available. Please use the space assigned and follow the provided guidance.</p>
+    </div>
+    <div class="card">
+      <p class="title">🌙 Are there quiet hours?</p>
+      <p class="desc">Yes. We kindly ask for quiet hours, especially between <strong>10:00 PM and 8:00 AM</strong>.</p>
+    </div>
+    <div class="card">
+      <p class="title">🚭 Is smoking allowed?</p>
+      <p class="desc">No. Smoking is not permitted inside the apartment or in internal areas.</p>
+    </div>
+  </div>
+
+  <!-- ES -->
+  <div class="lang-es lang">
+    <div class="card">
+      <p class="title">❓ ¿Cuáles son los horarios de check-in y check-out?</p>
+      <p class="desc">El check-in comienza desde las <strong>15:00</strong> y el check-out debe completarse antes de las <strong>11:00</strong>.</p>
+    </div>
+    <div class="card">
+      <p class="title">🪪 ¿Es obligatorio presentar documento?</p>
+      <p class="desc">Sí. Es obligatorio presentar un documento válido con foto al hacer check-in.</p>
+    </div>
+    <div class="card">
+      <p class="title">🚗 ¿Cómo funciona el estacionamiento?</p>
+      <p class="desc">Estacionamiento privado disponible. Use el espacio asignado y siga las indicaciones.</p>
+    </div>
+    <div class="card">
+      <p class="title">🌙 ¿Hay horario de silencio?</p>
+      <p class="desc">Sí. Pedimos respeto al silencio, especialmente de <strong>22:00 a 08:00</strong>.</p>
+    </div>
+    <div class="card">
+      <p class="title">🚭 ¿Está permitido fumar?</p>
+      <p class="desc">No. No se permite fumar dentro del apartamento ni en áreas internas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- REGRAS / NORMAS -->
+<section id="regras" class="section">
+  <h2>
+    <span class="lang-pt lang">Normas de Convivência</span>
+    <span class="lang-en lang">House Guidelines</span>
+    <span class="lang-es lang">Normas de Convivencia</span>
+  </h2>
+
+  <!-- PT -->
+  <div class="lang-pt lang">
+    <p class="mb-4">Para garantir uma experiência tranquila, confortável e harmoniosa para todos, convidamos você a conhecer nossas normas de convivência.</p>
+    <div class="card"><p class="title">🕘 Check-in e Check-out</p><p class="desc">Check-in a partir das <strong>15h</strong> e check-out até às <strong>11h</strong>.<br>Caso precise chegar ou sair em horários diferentes, teremos prazer em flexibilizar sempre que possível.</p></div>
+    <div class="card"><p class="title">🔐 Acesso ao apartamento</p><p class="desc">A senha da porta é <strong>digital e exclusiva da sua estadia</strong>, enviada até <strong>24 horas antes do check-in</strong>.<br>O acesso ao prédio é feito por <strong>tag digital</strong> entregue no check-in.<br>A portaria funciona <strong>24 horas</strong>.</p></div>
+    <div class="card"><p class="title">🚗 Garagem</p><p class="desc">O apartamento dispõe de <strong>1 vaga de garagem</strong>.<br>Caso necessite utilizá-la, pedimos a gentileza de <strong>avisar com antecedência</strong>.</p></div>
+    <div class="card"><p class="title">🐾 Animais de estimação</p><p class="desc"><strong>Não é permitida a entrada de animais de estimação</strong> no apartamento ou nas áreas do imóvel.</p></div>
+    <div class="card"><p class="title">🚭 Fumar</p><p class="desc"><strong>É proibido fumar</strong> dentro do apartamento e em qualquer área interna do imóvel.</p></div>
+    <div class="card"><p class="title">🌙 Horário de silêncio</p><p class="desc">Pedimos que seja respeitado o horário de silêncio das <strong>22h às 08h</strong>.</p></div>
+    <div class="card"><p class="title">🛋️ Uso do espaço</p><p class="desc">O apartamento deve ser utilizado apenas pelos hóspedes cadastrados.<br><strong>É expressamente proibido mover móveis, camas ou qualquer item do apartamento de lugar.</strong><br>Ao sair, certifique-se de <strong>apagar as luzes e desligar os aparelhos de ar-condicionado</strong>.</p></div>
+    <div class="card"><p class="title">👥 Número máximo de hóspedes</p><p class="desc">É permitido um máximo de <strong>6 hóspedes</strong> no apartamento, conforme a reserva realizada.<br><strong>Não é permitida a entrada de visitantes ou hóspedes adicionais.</strong></p></div>
+    <div class="card"><p class="title">⚠️ Danos e taxas adicionais</p><p class="desc">Serão cobradas <strong>taxas adicionais</strong> em caso de danos ou sujeiras permanentes, incluindo manchas fixadas em toalhas ou lençóis, queimaduras de cigarro, ou urina em colchões, sofás ou estofados em geral.</p></div>
+  </div>
+
+  <!-- EN -->
+  <div class="lang-en lang">
+    <p class="mb-4">To ensure a peaceful, comfortable and pleasant stay for everyone, please review the house guidelines below.</p>
+    <div class="card"><p class="title">🕘 Check-in & Check-out</p><p class="desc">Check-in from <strong>3:00 PM</strong> and check-out until <strong>11:00 AM</strong>.<br>Early check-in or late check-out may be arranged when possible.</p></div>
+    <div class="card"><p class="title">🔐 Apartment access</p><p class="desc">The apartment uses a <strong>digital door code</strong>, exclusive to your stay, sent up to <strong>24 hours before arrival</strong>.<br>Building access is via a <strong>digital tag</strong> provided at check-in.<br>Front desk operates <strong>24 hours</strong>.</p></div>
+    <div class="card"><p class="title">🚗 Garage</p><p class="desc"><strong>One parking space</strong> is available.<br>Please inform us <strong>in advance</strong> if you wish to use it.</p></div>
+    <div class="card"><p class="title">🐾 Pets</p><p class="desc"><strong>Pets are not allowed</strong> in the apartment or building.</p></div>
+    <div class="card"><p class="title">🚭 Smoking</p><p class="desc"><strong>Smoking is strictly prohibited</strong> inside the apartment or any indoor area.</p></div>
+    <div class="card"><p class="title">🌙 Quiet hours</p><p class="desc">Quiet hours are from <strong>10:00 PM to 8:00 AM</strong>.</p></div>
+    <div class="card"><p class="title">🛋️ Use of space</p><p class="desc">The apartment is for registered guests only.<br><strong>Moving furniture, beds or any items from their original position is strictly prohibited.</strong><br>Please <strong>turn off lights and air conditioning</strong> when leaving.</p></div>
+    <div class="card"><p class="title">👥 Maximum number of guests</p><p class="desc">The apartment accommodates a maximum of <strong>6 guests</strong>, as stated in the reservation.<br><strong>Additional guests or visitors are not allowed.</strong></p></div>
+    <div class="card"><p class="title">⚠️ Damages & extra fees</p><p class="desc"><strong>Additional fees</strong> will be charged for permanent stains or damages, including stained towels or linens, cigarette burns, or urine on mattresses, sofas or upholstered furniture.</p></div>
+  </div>
+
+  <!-- ES -->
+  <div class="lang-es lang">
+    <p class="mb-4">Para garantizar una estancia tranquila, cómoda y agradable, le invitamos a conocer las normas de convivencia.</p>
+    <div class="card"><p class="title">🕘 Check-in y Check-out</p><p class="desc">Check-in a partir de las <strong>15:00</strong> y check-out hasta las <strong>11:00</strong>.<br>La flexibilidad horaria es posible según disponibilidad.</p></div>
+    <div class="card"><p class="title">🔐 Acceso al apartamento</p><p class="desc">La puerta cuenta con <strong>cerradura digital</strong>, exclusiva para su estancia, enviada hasta <strong>24 horas antes de la llegada</strong>.<br>El acceso al edificio se realiza mediante <strong>tag digital</strong> entregado en el check-in.<br>La portería funciona <strong>24 horas</strong>.</p></div>
+    <div class="card"><p class="title">🚗 Garaje</p><p class="desc">Hay disponible <strong>1 plaza de garaje</strong>.<br>Por favor avise <strong>con antelación</strong> si necesita utilizarla.</p></div>
+    <div class="card"><p class="title">🐾 Mascotas</p><p class="desc"><strong>No se permiten mascotas</strong> en el apartamento ni en el edificio.</p></div>
+    <div class="card"><p class="title">🚭 Fumar</p><p class="desc"><strong>Está prohibido fumar</strong> dentro del apartamento y en áreas internas.</p></div>
+    <div class="card"><p class="title">🌙 Horario de silencio</p><p class="desc">El horario de silencio es de <strong>22:00 a 08:00</strong>.</p></div>
+    <div class="card"><p class="title">🛋️ Uso del espacio</p><p class="desc">El apartamento es de uso exclusivo para los huéspedes registrados.<br><strong>Está estrictamente prohibido mover muebles, camas o cualquier objeto de su lugar original.</strong><br>Al salir, asegúrese de <strong>apagar las luces y el aire acondicionado</strong>.</p></div>
+    <div class="card"><p class="title">👥 Número máximo de huéspedes</p><p class="desc">El apartamento permite un máximo de <strong>6 huéspedes</strong>, según la reserva realizada.<br><strong>No se permiten visitantes ni huéspedes adicionales.</strong></p></div>
+    <div class="card"><p class="title">⚠️ Daños y cargos adicionales</p><p class="desc">Se aplicarán <strong>cargos adicionales</strong> por daños o suciedad permanente, como manchas en toallas o sábanas, quemaduras de cigarrillos, o orina en colchones, sofás o tapizados.</p></div>
+  </div>
+</section>
+
+<!-- SUPERMERCADOS -->
+<section id="supermercados" class="section">
+  <h2>
+    <span class="lang-en lang">Supermarkets & Shops</span>
+    <span class="lang-pt lang">Supermercados e Lojas</span>
+    <span class="lang-es lang">Supermercados y Tiendas</span>
+  </h2>
+
+  <!-- EN -->
+  <div class="lang-en lang">
+    <p class="mb-4">Supermarkets and shops near your stay in Icaraí, Niterói:</p>
+    <div class="card">
+      <div class="flex-between"><p class="title">Prezunic – Icaraí</p><span class="badge highlight">✔ Recommended</span></div>
+      <p class="desc">Large and complete supermarket with groceries, fresh food, bakery and household items.</p>
+      <a href="https://www.google.com/maps/search/?api=1&query=Prezunic+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" class="btn-card">View on Google Maps</a>
+    </div>
+    <div class="card">
+      <div class="flex-between"><p class="title">Real Supermercados</p><span class="badge">Nearby</span></div>
+      <p class="desc">Well-stocked supermarket for daily shopping.</p>
+      <a href="https://www.google.com/maps/search/?api=1&query=Real+Supermercados+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" class="btn-card">View on Google Maps</a>
+    </div>
+    <div class="card">
+      <div class="flex-between"><p class="title">SuperPrix – Icaraí</p><span class="badge">Nearby</span></div>
+      <p class="desc">Convenient local supermarket for quick purchases.</p>
+      <a href="https://www.google.com/maps/search/?api=1&query=SuperPrix+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" class="btn-card">View on Google Maps</a>
+    </div>
+    <div class="card">
+      <div class="flex-between"><p class="title">Hortifruti</p><span class="badge">Nearby</span></div>
+      <p class="desc">Fresh fruits, vegetables and healthy food options.</p>
+      <a href="https://www.google.com/maps/search/?api=1&query=Hortifruti+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" class="btn-card">View on Google Maps</a>
+    </div>
+  </div>
+
+  <!-- PT -->
+  <div class="lang-pt lang">
+    <p class="mb-4">Supermercados e lojas próximos ao endereço em Icaraí, Niterói:</p>
+    <div class="card">
+      <div class="flex-between"><p class="title">Prezunic – Icaraí</p><span class="badge highlight">✔ Recomendado</span></div>
+      <p class="desc">Supermercado grande e completo com alimentos, padaria, hortifruti e itens domésticos.</p>
+      <a href="https://www.google.com/maps/search/?api=1&query=Prezunic+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
+    </div>
+    <div class="card">
+      <div class="flex-between"><p class="title">Real Supermercados</p><span class="badge">Próximo</span></div>
+      <p class="desc">Supermercado bem abastecido para compras do dia a dia.</p>
+      <a href="https://www.google.com/maps/search/?api=1&query=Real+Supermercados+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
+    </div>
+    <div class="card">
+      <div class="flex-between"><p class="title">SuperPrix – Icaraí</p><span class="badge">Próximo</span></div>
+      <p class="desc">Opção prática para compras rápidas.</p>
+      <a href="https://www.google.com/maps/search/?api=1&query=SuperPrix+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
+    </div>
+    <div class="card">
+      <div class="flex-between"><p class="title">Hortifruti</p><span class="badge">Próximo</span></div>
+      <p class="desc">Frutas, legumes e produtos frescos.</p>
+      <a href="https://www.google.com/maps/search/?api=1&query=Hortifruti+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
+    </div>
+  </div>
+
+  <!-- ES -->
+  <div class="lang-es lang">
+    <p class="mb-4">Supermercados y tiendas cerca de su estancia en Icaraí, Niterói:</p>
+    <div class="card">
+      <div class="flex-between"><p class="title">Prezunic – Icaraí</p><span class="badge highlight">✔ Recomendado</span></div>
+      <p class="desc">Supermercado grande y completo con alimentos frescos, panadería y artículos del hogar.</p>
+      <a href="https://www.google.com/maps/search/?api=1&query=Prezunic+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver en Google Maps</a>
+    </div>
+    <div class="card">
+      <div class="flex-between"><p class="title">Real Supermercados</p><span class="badge">Cerca</span></div>
+      <p class="desc">Supermercado bien surtido para compras diarias.</p>
+      <a href="https://www.google.com/maps/search/?api=1&query=Real+Supermercados+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver en Google Maps</a>
+    </div>
+    <div class="card">
+      <div class="flex-between"><p class="title">SuperPrix – Icaraí</p><span class="badge">Cerca</span></div>
+      <p class="desc">Opción práctica para compras rápidas.</p>
+      <a href="https://www.google.com/maps/search/?api=1&query=SuperPrix+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver en Google Maps</a>
+    </div>
+    <div class="card">
+      <div class="flex-between"><p class="title">Hortifruti</p><span class="badge">Cerca</span></div>
+      <p class="desc">Frutas, verduras y productos frescos.</p>
+      <a href="https://www.google.com/maps/search/?api=1&query=Hortifruti+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver en Google Maps</a>
+    </div>
+  </div>
+</section>
+
+<!-- RESTAURANTES -->
+<section id="restaurantes" class="section">
+  <h2>
+    <span class="lang-en lang">Restaurants</span>
+    <span class="lang-pt lang">Restaurantes</span>
+    <span class="lang-es lang">Restaurantes</span>
+  </h2>
+
+  <!-- EN -->
+  <div class="lang-en lang">
+    <p class="mb-4">Recommended places near the apartment:</p>
+    <div class="card"><p class="title">Novo Ponto ★★★★★</p><p class="desc">Traditional Brazilian bar and restaurant, very popular with locals.</p><a href="https://www.google.com/maps/search/?api=1&query=Novo+Ponto+Icaraí+Niterói" target="_blank" class="btn-card">View on Google Maps</a></div>
+    <div class="card"><p class="title">Malbec ★★★★★</p><p class="desc">Restaurant with a pleasant atmosphere and excellent food, on the same street as the apartment.</p><a href="https://www.google.com/maps/search/?api=1&query=Malbec+Rua+Cinco+de+Julho+Icaraí+Niterói" target="_blank" class="btn-card">View on Google Maps</a></div>
+    <div class="card"><p class="title">Bibi Sucos ★★★★★</p><p class="desc">Great option for juices, snacks and quick meals.</p><a href="https://www.google.com/maps/search/?api=1&query=Bibi+Sucos+Icaraí+Niterói" target="_blank" class="btn-card">View on Google Maps</a></div>
+    <div class="card"><p class="title">Bendito ★★★★★</p><p class="desc">Cool bar and restaurant in São Francisco, perfect for drinks and casual dining.</p><a href="https://www.google.com/maps/search/?api=1&query=Bendito+São+Francisco+Niterói" target="_blank" class="btn-card">View on Google Maps</a></div>
+  </div>
+
+  <!-- PT -->
+  <div class="lang-pt lang">
+    <p class="mb-4">Locais recomendados próximos ao apartamento:</p>
+    <div class="card"><p class="title">Novo Ponto ★★★★★</p><p class="desc">Bar e restaurante tradicional, muito frequentado pelos moradores da região.</p><a href="https://www.google.com/maps/search/?api=1&query=Novo+Ponto+Icaraí+Niterói" target="_blank" class="btn-card">Ver no Google Maps</a></div>
+    <div class="card"><p class="title">Malbec ★★★★★</p><p class="desc">Restaurante com ótimo ambiente e excelente gastronomia, na mesma rua do apartamento.</p><a href="https://www.google.com/maps/search/?api=1&query=Malbec+Rua+Cinco+de+Julho+Icaraí+Niterói" target="_blank" class="btn-card">Ver no Google Maps</a></div>
+    <div class="card"><p class="title">Bibi Sucos ★★★★★</p><p class="desc">Ótima opção para sucos naturais, lanches e refeições rápidas.</p><a href="https://www.google.com/maps/search/?api=1&query=Bibi+Sucos+Icaraí+Niterói" target="_blank" class="btn-card">Ver no Google Maps</a></div>
+    <div class="card"><p class="title">Bendito ★★★★★</p><p class="desc">Bar e restaurante descolado em São Francisco, ideal para petiscos e drinks.</p><a href="https://www.google.com/maps/search/?api=1&query=Bendito+São+Francisco+Niterói" target="_blank" class="btn-card">Ver no Google Maps</a></div>
+  </div>
+
+  <!-- ES -->
+  <div class="lang-es lang">
+    <p class="mb-4">Lugares recomendados cerca del apartamento:</p>
+    <div class="card"><p class="title">Novo Ponto ★★★★★</p><p class="desc">Bar y restaurante tradicional, muy popular entre los locales.</p><a href="https://www.google.com/maps/search/?api=1&query=Novo+Ponto+Icaraí+Niterói" target="_blank" class="btn-card">Ver en Google Maps</a></div>
+    <div class="card"><p class="title">Malbec ★★★★★</p><p class="desc">Restaurante con excelente ambiente, ubicado en la misma calle del apartamento.</p><a href="https://www.google.com/maps/search/?api=1&query=Malbec+Rua+Cinco+de+Julho+Icaraí+Niterói" target="_blank" class="btn-card">Ver en Google Maps</a></div>
+    <div class="card"><p class="title">Bibi Sucos ★★★★★</p><p class="desc">Excelente opción para jugos naturales, snacks y comidas rápidas.</p><a href="https://www.google.com/maps/search/?api=1&query=Bibi+Sucos+Icaraí+Niterói" target="_blank" class="btn-card">Ver en Google Maps</a></div>
+    <div class="card"><p class="title">Bendito ★★★★★</p><p class="desc">Bar y restaurante moderno en São Francisco, ideal para tapas y tragos.</p><a href="https://www.google.com/maps/search/?api=1&query=Bendito+São+Francisco+Niterói" target="_blank" class="btn-card">Ver en Google Maps</a></div>
+  </div>
+</section>
+
+<!-- LUGARES PARA VISITAR -->
 <section id="lugares" class="section">
-  <h2 class="font-serif">
+  <h2>
     <span class="lang-en lang">Places to Visit</span>
     <span class="lang-pt lang">Lugares para Visitar</span>
     <span class="lang-es lang">Lugares para Visitar</span>
@@ -833,304 +1502,40 @@
   <!-- EN -->
   <div class="lang-en lang">
     <p class="mb-4">Must-see places in Niterói:</p>
-
-    <div class="card destaque-card">
-      <p class="title">Icaraí Beach</p>
-      <p class="desc">Urban beach with a beautiful view of Rio de Janeiro skyline.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Praia+de+Icara%C3%AD+Niter%C3%B3i" target="_blank" class="btn-card">View on Google Maps</a>
-    </div>
-
-    <div class="card destaque-card">
-      <p class="title">MAC Niterói</p>
-      <p class="desc">Iconic contemporary art museum designed by Oscar Niemeyer.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=MAC+Niter%C3%B3i" target="_blank" class="btn-card">View on Google Maps</a>
-    </div>
-
-    <div class="card destaque-card">
-      <p class="title">Parque da Cidade</p>
-      <p class="desc">Lookout with one of the most breathtaking views in the region.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Parque+da+Cidade+Niter%C3%B3i" target="_blank" class="btn-card">View on Google Maps</a>
-    </div>
-
-    <div class="card destaque-card">
-      <p class="title">Caminho Niemeyer</p>
-      <p class="desc">Architectural complex with several works by Oscar Niemeyer.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Caminho+Niemeyer+Niter%C3%B3i" target="_blank" class="btn-card">View on Google Maps</a>
-    </div>
+    <div class="card"><p class="title">Icaraí Beach</p><p class="desc">Urban beach with a beautiful view of Rio de Janeiro skyline.</p><a href="https://www.google.com/maps/search/?api=1&query=Praia+de+Icara%C3%AD+Niter%C3%B3i" target="_blank" class="btn-card">View on Google Maps</a></div>
+    <div class="card"><p class="title">MAC Niterói</p><p class="desc">Iconic contemporary art museum designed by Oscar Niemeyer.</p><a href="https://www.google.com/maps/search/?api=1&query=MAC+Niter%C3%B3i" target="_blank" class="btn-card">View on Google Maps</a></div>
+    <div class="card"><p class="title">Parque da Cidade</p><p class="desc">Lookout with one of the most breathtaking views in the region.</p><a href="https://www.google.com/maps/search/?api=1&query=Parque+da+Cidade+Niter%C3%B3i" target="_blank" class="btn-card">View on Google Maps</a></div>
+    <div class="card"><p class="title">Caminho Niemeyer</p><p class="desc">Architectural complex with several works by Oscar Niemeyer.</p><a href="https://www.google.com/maps/search/?api=1&query=Caminho+Niemeyer+Niter%C3%B3i" target="_blank" class="btn-card">View on Google Maps</a></div>
   </div>
 
   <!-- PT -->
   <div class="lang-pt lang">
     <p class="mb-4">Pontos imperdíveis para conhecer em Niterói:</p>
-
-    <div class="card destaque-card">
-      <p class="title">Praia de Icaraí</p>
-      <p class="desc">Praia urbana com vista privilegiada do Rio de Janeiro.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Praia+de+Icara%C3%AD+Niter%C3%B3i" target="_blank" class="btn-card">Ver no Google Maps</a>
-    </div>
-
-    <div class="card destaque-card">
-      <p class="title">MAC Niterói</p>
-      <p class="desc">Museu de Arte Contemporânea projetado por Oscar Niemeyer.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=MAC+Niter%C3%B3i" target="_blank" class="btn-card">Ver no Google Maps</a>
-    </div>
-
-    <div class="card destaque-card">
-      <p class="title">Parque da Cidade</p>
-      <p class="desc">Mirante com uma das vistas mais bonitas da região.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Parque+da+Cidade+Niter%C3%B3i" target="_blank" class="btn-card">Ver no Google Maps</a>
-    </div>
-
-    <div class="card destaque-card">
-      <p class="title">Caminho Niemeyer</p>
-      <p class="desc">Conjunto arquitetônico com obras icônicas de Niemeyer.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Caminho+Niemeyer+Niter%C3%B3i" target="_blank" class="btn-card">Ver no Google Maps</a>
-    </div>
+    <div class="card"><p class="title">Praia de Icaraí</p><p class="desc">Praia urbana com vista privilegiada do Rio de Janeiro.</p><a href="https://www.google.com/maps/search/?api=1&query=Praia+de+Icara%C3%AD+Niter%C3%B3i" target="_blank" class="btn-card">Ver no Google Maps</a></div>
+    <div class="card"><p class="title">MAC Niterói</p><p class="desc">Museu de Arte Contemporânea projetado por Oscar Niemeyer.</p><a href="https://www.google.com/maps/search/?api=1&query=MAC+Niter%C3%B3i" target="_blank" class="btn-card">Ver no Google Maps</a></div>
+    <div class="card"><p class="title">Parque da Cidade</p><p class="desc">Mirante com uma das vistas mais bonitas da região.</p><a href="https://www.google.com/maps/search/?api=1&query=Parque+da+Cidade+Niter%C3%B3i" target="_blank" class="btn-card">Ver no Google Maps</a></div>
+    <div class="card"><p class="title">Caminho Niemeyer</p><p class="desc">Conjunto arquitetônico com obras icônicas de Niemeyer.</p><a href="https://www.google.com/maps/search/?api=1&query=Caminho+Niemeyer+Niter%C3%B3i" target="_blank" class="btn-card">Ver no Google Maps</a></div>
   </div>
 
   <!-- ES -->
   <div class="lang-es lang">
     <p class="mb-4">Lugares imperdibles para visitar en Niterói:</p>
-
-    <div class="card destaque-card">
-      <p class="title">Playa de Icaraí</p>
-      <p class="desc">Playa urbana con vista privilegiada de Río de Janeiro.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Praia+de+Icara%C3%AD+Niter%C3%B3i" target="_blank" class="btn-card">Ver en Google Maps</a>
-    </div>
-
-    <div class="card destaque-card">
-      <p class="title">MAC Niterói</p>
-      <p class="desc">Museo de Arte Contemporáneo diseñado por Oscar Niemeyer.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=MAC+Niter%C3%B3i" target="_blank" class="btn-card">Ver en Google Maps</a>
-    </div>
-
-    <div class="card destaque-card">
-      <p class="title">Parque da Cidade</p>
-      <p class="desc">Mirador con una de las mejores vistas de la región.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Parque+da+Cidade+Niter%C3%B3i" target="_blank" class="btn-card">Ver en Google Maps</a>
-    </div>
-
-    <div class="card destaque-card">
-      <p class="title">Caminho Niemeyer</p>
-      <p class="desc">Conjunto arquitectónico con obras icónicas de Niemeyer.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Caminho+Niemeyer+Niter%C3%B3i" target="_blank" class="btn-card">Ver en Google Maps</a>
-    </div>
+    <div class="card"><p class="title">Playa de Icaraí</p><p class="desc">Playa urbana con vista privilegiada de Río de Janeiro.</p><a href="https://www.google.com/maps/search/?api=1&query=Praia+de+Icara%C3%AD+Niter%C3%B3i" target="_blank" class="btn-card">Ver en Google Maps</a></div>
+    <div class="card"><p class="title">MAC Niterói</p><p class="desc">Museo de Arte Contemporáneo diseñado por Oscar Niemeyer.</p><a href="https://www.google.com/maps/search/?api=1&query=MAC+Niter%C3%B3i" target="_blank" class="btn-card">Ver en Google Maps</a></div>
+    <div class="card"><p class="title">Parque da Cidade</p><p class="desc">Mirador con una de las mejores vistas de la región.</p><a href="https://www.google.com/maps/search/?api=1&query=Parque+da+Cidade+Niter%C3%B3i" target="_blank" class="btn-card">Ver en Google Maps</a></div>
+    <div class="card"><p class="title">Caminho Niemeyer</p><p class="desc">Conjunto arquitectónico con obras icónicas de Niemeyer.</p><a href="https://www.google.com/maps/search/?api=1&query=Caminho+Niemeyer+Niter%C3%B3i" target="_blank" class="btn-card">Ver en Google Maps</a></div>
   </div>
 </section>
-  
-  <!-- TRANSPORTE -->
-<section id="transporte" class="section">
-  <h2 class="font-serif">
-    <span class="lang-en lang">Transport</span>
-    <span class="lang-pt lang">Transporte</span>
-    <span class="lang-es lang">Transporte</span>
-  </h2>
 
-  <!-- ENGLISH -->
-  <div class="lang-en lang">
-    <p class="mb-4">
-      Getting around Niterói is easy with ride-hailing apps, taxis,
-      buses and ferry connections to Rio de Janeiro.
-    </p>
-
-    <div class="card">
-      <p class="title">🚗 Ride-hailing apps & Taxis</p>
-      <p class="desc">
-        <strong>Uber</strong> and <strong>99</strong> operate normally throughout Niterói.
-        Local taxis are also widely available, especially in Icaraí and nearby neighborhoods.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🚌 Buses</p>
-      <p class="desc">
-        Niterói has an extensive bus network connecting beaches, downtown,
-        neighborhoods and the ferry terminal.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">⛴️ Ferry (Barca)</p>
-      <p class="desc">
-        The ferry connects Niterói to Rio de Janeiro (Praça XV),
-        offering a fast and scenic crossing of Guanabara Bay.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">✈️ Airports</p>
-      <p class="desc">
-        The nearest airports are <strong>Santos Dumont (SDU)</strong> and
-        <strong>Galeão – Tom Jobim (GIG)</strong>, both easily accessible by car or ferry.
-      </p>
-    </div>
-  </div>
-
-  <!-- PORTUGUÊS -->
-  <div class="lang-pt lang">
-    <p class="mb-4">
-      A locomoção em Niterói é fácil com aplicativos de transporte,
-      táxis, ônibus e a ligação por barca com o Rio de Janeiro.
-    </p>
-
-    <div class="card">
-      <p class="title">🚗 Aplicativos e Táxis</p>
-      <p class="desc">
-        <strong>Uber</strong> e <strong>99</strong> funcionam normalmente em toda Niterói.
-        Táxis também são facilmente encontrados, especialmente em Icaraí e região.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🚌 Ônibus</p>
-      <p class="desc">
-        A cidade possui ampla rede de ônibus ligando praias, bairros,
-        centro da cidade e o terminal das barcas.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">⛴️ Barca</p>
-      <p class="desc">
-        A barca faz a travessia entre Niterói e o Rio de Janeiro (Praça XV),
-        sendo uma opção rápida e agradável.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">✈️ Aeroportos</p>
-      <p class="desc">
-        Os aeroportos mais próximos são <strong>Santos Dumont (SDU)</strong> e
-        <strong>Galeão – Tom Jobim (GIG)</strong>, com fácil acesso.
-      </p>
-    </div>
-  </div>
-
-  <!-- ESPAÑOL -->
-  <div class="lang-es lang">
-    <p class="mb-4">
-      Moverse por Niterói es sencillo gracias a aplicaciones de transporte,
-      taxis, autobuses y la conexión en ferry con Río de Janeiro.
-    </p>
-
-    <div class="card">
-      <p class="title">🚗 Aplicaciones y Taxis</p>
-      <p class="desc">
-        <strong>Uber</strong> y <strong>99</strong> operan normalmente en toda la ciudad.
-        Los taxis también son fáciles de encontrar, especialmente en Icaraí.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🚌 Autobuses</p>
-      <p class="desc">
-        Niterói cuenta con una amplia red de autobuses que conecta playas,
-        barrios, el centro y la terminal del ferry.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">⛴️ Ferry</p>
-      <p class="desc">
-        El ferry conecta Niterói con Río de Janeiro (Praça XV),
-        ofreciendo un cruce rápido y con hermosas vistas.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">✈️ Aeropuertos</p>
-      <p class="desc">
-        Los aeropuertos más cercanos son <strong>Santos Dumont (SDU)</strong> y
-        <strong>Galeão – Tom Jobim (GIG)</strong>.
-      </p>
-    </div>
-  </div>
-</section>
-  
-  <!-- AVALIAÇÃO / RESEÑAS -->
-<section id="avaliacao" class="section">
-  <h2 class="font-serif">
-    <span class="lang-en lang">Reviews</span>
-    <span class="lang-pt lang">Avaliações</span>
-    <span class="lang-es lang">Reseñas</span>
-  </h2>
-
-  <!-- EN -->
-  <div class="lang-en lang text-center">
-    <p class="opacity-80 mb-4">
-      Guests consistently highlight the excellent location, cleanliness,
-      comfort and smooth check-in experience.
-    </p>
-
-    <a
-      href="https://www.airbnb.com.br/rooms/1556578639361187994?viralityEntryPoint=1&s=76"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="btn-accent"
-      style="display:block;width:100%;"
-    >
-      View reviews on Airbnb
-    </a>
-
-    <p class="text-sm opacity-70 mt-4">
-      Your feedback is very important to us!
-    </p>
-  </div>
-
-  <!-- PT -->
-  <div class="lang-pt lang text-center">
-    <p class="opacity-80 mb-4">
-      Os hóspedes destacam a excelente localização, limpeza,
-      conforto e facilidade no check-in.
-    </p>
-
-    <a
-      href="https://www.airbnb.com.br/rooms/1556578639361187994?viralityEntryPoint=1&s=76"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="btn-accent"
-      style="display:block;width:100%;"
-    >
-      Ver avaliações no Airbnb
-    </a>
-
-    <p class="text-sm opacity-70 mt-4">
-      Sua avaliação é muito importante para nós!
-    </p>
-  </div>
-
-  <!-- ES -->
-  <div class="lang-es lang text-center">
-    <p class="opacity-80 mb-4">
-      Los huéspedes destacan la excelente ubicación, limpieza,
-      comodidad y facilidad en el check-in.
-    </p>
-
-    <a
-      href="https://www.airbnb.com.br/rooms/1556578639361187994?viralityEntryPoint=1&s=76"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="btn-accent"
-      style="display:block;width:100%;"
-    >
-      Ver reseñas en Airbnb
-    </a>
-
-    <p class="text-sm opacity-70 mt-4">
-      ¡Tu reseña es muy importante para nosotros!
-    </p>
-  </div>
-</section>
-  
-  <!-- PASSEIOS -->
+<!-- PASSEIOS -->
 <section id="passeios" class="section">
-  <h2 class="font-serif">
+  <h2>
     <span class="lang-en lang">Tours & Experiences</span>
     <span class="lang-pt lang">Passeios e Experiências</span>
     <span class="lang-es lang">Paseos y Experiencias</span>
   </h2>
 
-  <!-- ================= NATUREZA ================= -->
+  <!-- EN - Nature -->
   <div class="lang-en lang">
     <h3 class="subtitle">🌿 Nature</h3>
 
@@ -1145,42 +1550,7 @@
       <p class="desc">A scenic trail along the cliffs with breathtaking ocean views.</p>
       <a href="https://www.google.com/maps/search/?api=1&query=Trilha+do+Costão+de+Itacoatiara+Niterói+RJ" target="_blank" class="btn-card">View on Google Maps</a>
     </div>
-  </div>
 
-  <div class="lang-pt lang">
-    <h3 class="subtitle">🌿 Natureza</h3>
-
-    <div class="card">
-      <p class="title">Parque da Cidade</p>
-      <p class="desc">Um dos melhores mirantes de Niterói, com vista panorâmica da Baía de Guanabara e do Rio de Janeiro.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Parque+da+Cidade+Niterói+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
-    </div>
-
-    <div class="card">
-      <p class="title">Trilha do Costão de Itacoatiara</p>
-      <p class="desc">Trilha à beira do costão com vistas impressionantes do oceano.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Trilha+do+Costão+de+Itacoatiara+Niterói+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
-    </div>
-  </div>
-
-  <div class="lang-es lang">
-    <h3 class="subtitle">🌿 Naturaleza</h3>
-
-    <div class="card">
-      <p class="title">Parque da Cidade</p>
-      <p class="desc">Uno de los mejores miradores de Niterói, con vistas panorámicas de la Bahía de Guanabara.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Parque+da+Cidade+Niterói+RJ" target="_blank" class="btn-card">Ver en Google Maps</a>
-    </div>
-
-    <div class="card">
-      <p class="title">Sendero del Costón de Itacoatiara</p>
-      <p class="desc">Sendero junto a los acantilados con vistas espectaculares al mar.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Trilha+do+Costão+de+Itacoatiara+Niterói+RJ" target="_blank" class="btn-card">Ver en Google Maps</a>
-    </div>
-  </div>
-
-  <!-- ================= PRAIAS ================= -->
-  <div class="lang-en lang">
     <h3 class="subtitle">🏖️ Beaches</h3>
 
     <div class="card">
@@ -1197,12 +1567,40 @@
 
     <div class="card">
       <p class="title">Itacoatiara Beach</p>
-      <p class="desc">One of the most beautiful beaches in Niterói, popular with surfers.</p>
+      <p class="desc">
+        One of the most beautiful beaches in Niterói, popular with surfers and nature lovers,
+        surrounded by preserved landscapes and impressive coastal scenery.
+      </p>
       <a href="https://www.google.com/maps/search/?api=1&query=Praia+de+Itacoatiara+Niterói+RJ" target="_blank" class="btn-card">View on Google Maps</a>
+    </div>
+
+    <div class="card">
+      <p class="title">Morcego Beach</p>
+      <p class="desc">
+        A small and wild beach located between Itacoatiara and Camboinhas, accessible only by trail or by sea.
+        It can be admired during Hawaiian canoe (Va’a) paddling routes along the coast,
+        offering a unique and paradisiacal perspective.
+      </p>
+      <a href="https://www.google.com/maps/search/?api=1&query=Praia+do+Morcego+Niterói+RJ" target="_blank" class="btn-card">View on Google Maps</a>
     </div>
   </div>
 
+  <!-- PT - Natureza -->
   <div class="lang-pt lang">
+    <h3 class="subtitle">🌿 Natureza</h3>
+
+    <div class="card">
+      <p class="title">Parque da Cidade</p>
+      <p class="desc">Um dos melhores mirantes de Niterói, com vista panorâmica da Baía de Guanabara e do Rio de Janeiro.</p>
+      <a href="https://www.google.com/maps/search/?api=1&query=Parque+da+Cidade+Niterói+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
+    </div>
+
+    <div class="card">
+      <p class="title">Trilha do Costão de Itacoatiara</p>
+      <p class="desc">Trilha à beira do costão com vistas impressionantes do oceano.</p>
+      <a href="https://www.google.com/maps/search/?api=1&query=Trilha+do+Costão+de+Itacoatiara+Niterói+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
+    </div>
+
     <h3 class="subtitle">🏖️ Praias</h3>
 
     <div class="card">
@@ -1219,12 +1617,40 @@
 
     <div class="card">
       <p class="title">Praia de Itacoatiara</p>
-      <p class="desc">Uma das praias mais bonitas de Niterói, muito procurada por surfistas.</p>
+      <p class="desc">
+        Uma das praias mais bonitas de Niterói, muito procurada por surfistas e amantes da natureza,
+        cercada por paisagens preservadas e mar de forte presença.
+      </p>
       <a href="https://www.google.com/maps/search/?api=1&query=Praia+de+Itacoatiara+Niterói+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
+    </div>
+
+    <div class="card">
+      <p class="title">Praia do Morcego</p>
+      <p class="desc">
+        Pequena e selvagem, localizada entre Itacoatiara e Camboinhas, com acesso apenas por trilha ou pelo mar.
+        Pode ser apreciada durante os passeios de canoa havaiana (Va’a) ao longo da costa,
+        proporcionando um visual panorâmico e paradisíaco.
+      </p>
+      <a href="https://www.google.com/maps/search/?api=1&query=Praia+do+Morcego+Niterói+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
     </div>
   </div>
 
+  <!-- ES - Naturaleza -->
   <div class="lang-es lang">
+    <h3 class="subtitle">🌿 Naturaleza</h3>
+
+    <div class="card">
+      <p class="title">Parque da Cidade</p>
+      <p class="desc">Uno de los mejores miradores de Niterói, con vistas panorámicas de la Bahía de Guanabara.</p>
+      <a href="https://www.google.com/maps/search/?api=1&query=Parque+da+Cidade+Niterói+RJ" target="_blank" class="btn-card">Ver en Google Maps</a>
+    </div>
+
+    <div class="card">
+      <p class="title">Sendero del Costón de Itacoatiara</p>
+      <p class="desc">Sendero junto a los acantilados con vistas espectaculares al mar.</p>
+      <a href="https://www.google.com/maps/search/?api=1&query=Trilha+do+Costão+de+Itacoatiara+Niterói+RJ" target="_blank" class="btn-card">Ver en Google Maps</a>
+    </div>
+
     <h3 class="subtitle">🏖️ Playas</h3>
 
     <div class="card">
@@ -1241,704 +1667,94 @@
 
     <div class="card">
       <p class="title">Playa de Itacoatiara</p>
-      <p class="desc">Una de las playas más hermosas de Niterói, ideal para surf.</p>
+      <p class="desc">
+        Una de las playas más hermosas de Niterói, muy buscada por surfistas y amantes de la naturaleza,
+        rodeada de paisajes preservados.
+      </p>
       <a href="https://www.google.com/maps/search/?api=1&query=Praia+de+Itacoatiara+Niterói+RJ" target="_blank" class="btn-card">Ver en Google Maps</a>
     </div>
-  </div>
-
-  <!-- ================= CULTURA ================= -->
-  <div class="lang-en lang">
-    <h3 class="subtitle">🏛️ Culture</h3>
 
     <div class="card">
-      <p class="title">MAC – Contemporary Art Museum</p>
-      <p class="desc">Iconic museum designed by Oscar Niemeyer with stunning sea views.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Museu+de+Arte+Contemporânea+Niterói+RJ" target="_blank" class="btn-card">View on Google Maps</a>
-    </div>
-
-    <div class="card">
-      <p class="title">Santa Cruz Fortress</p>
-      <p class="desc">Historic fortress at the entrance of Guanabara Bay.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Fortaleza+de+Santa+Cruz+Niterói+RJ" target="_blank" class="btn-card">View on Google Maps</a>
-    </div>
-  </div>
-
-  <div class="lang-pt lang">
-    <h3 class="subtitle">🏛️ Cultura</h3>
-
-    <div class="card">
-      <p class="title">MAC – Museu de Arte Contemporânea</p>
-      <p class="desc">Museu icônico de Oscar Niemeyer com vista para o mar.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Museu+de+Arte+Contemporânea+Niterói+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
-    </div>
-
-    <div class="card">
-      <p class="title">Fortaleza de Santa Cruz</p>
-      <p class="desc">Fortaleza histórica na entrada da Baía de Guanabara.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Fortaleza+de+Santa+Cruz+Niterói+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
-    </div>
-  </div>
-
-  <div class="lang-es lang">
-    <h3 class="subtitle">🏛️ Cultura</h3>
-
-    <div class="card">
-      <p class="title">MAC – Museo de Arte Contemporáneo</p>
-      <p class="desc">Museo icónico diseñado por Oscar Niemeyer con vistas al mar.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Museu+de+Arte+Contemporânea+Niterói+RJ" target="_blank" class="btn-card">Ver en Google Maps</a>
-    </div>
-
-    <div class="card">
-      <p class="title">Fortaleza de Santa Cruz</p>
-      <p class="desc">Fortaleza histórica en la entrada de la Bahía de Guanabara.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Fortaleza+de+Santa+Cruz+Niterói+RJ" target="_blank" class="btn-card">Ver en Google Maps</a>
+      <p class="title">Playa del Murciélago</p>
+      <p class="desc">
+        Pequeña playa salvaje ubicada entre Itacoatiara y Camboinhas, con acceso solo por sendero o por mar.
+        Se puede apreciar durante los recorridos en canoa hawaiana (Va’a),
+        ofreciendo una vista panorámica y paradisíaca de la costa.
+      </p>
+      <a href="https://www.google.com/maps/search/?api=1&query=Praia+do+Morcego+Niterói+RJ" target="_blank" class="btn-card">Ver en Google Maps</a>
     </div>
   </div>
 </section>
 
-<!-- FAQ -->
-<section id="faq" class="section" aria-labelledby="faqTitle">
-  <h2 id="faqTitle" class="font-serif">
-    <span class="lang-pt lang">Perguntas Frequentes</span>
-    <span class="lang-en lang">Frequently Asked Questions</span>
-    <span class="lang-es lang">Preguntas Frecuentes</span>
-  </h2>
-
-  <!-- PORTUGUÊS -->
-  <div class="lang-pt lang">
-    <div class="card">
-      <p class="title">❓ Quais são os horários de check-in e check-out?</p>
-      <p class="desc">
-        O check-in inicia a partir das <strong>15h00</strong> e o check-out deve ser realizado até às <strong>11h00</strong>.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🪪 É necessário apresentar documento no check-in?</p>
-      <p class="desc">
-        Sim. É necessário apresentar um documento original válido com foto no momento do check-in.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🚗 Como funciona o estacionamento?</p>
-      <p class="desc">
-        Estacionamento privativo disponível. Utilize a vaga indicada e siga as orientações fornecidas.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🌙 Existe horário de silêncio?</p>
-      <p class="desc">
-        Sim. Solicitamos silêncio e respeito aos vizinhos, especialmente das <strong>22h00 às 08h00</strong>.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🚭 É permitido fumar?</p>
-      <p class="desc">
-        Não. É proibido fumar dentro do apartamento ou em áreas internas.
-      </p>
-    </div>
-  </div>
-
-  <!-- INGLÊS -->
-  <div class="lang-en lang">
-    <div class="card">
-      <p class="title">❓ What are check-in and check-out times?</p>
-      <p class="desc">
-        Check-in starts from <strong>3:00 PM</strong> and check-out must be completed by <strong>11:00 AM</strong>.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🪪 Is an ID required at check-in?</p>
-      <p class="desc">
-        Yes. A valid photo ID is required at check-in.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🚗 How does parking work?</p>
-      <p class="desc">
-        Private parking is available. Please use the space assigned and follow the provided guidance.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🌙 Are there quiet hours?</p>
-      <p class="desc">
-        Yes. We kindly ask for quiet hours, especially between <strong>10:00 PM and 8:00 AM</strong>.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🚭 Is smoking allowed?</p>
-      <p class="desc">
-        No. Smoking is not permitted inside the apartment or in internal areas.
-      </p>
-    </div>
-  </div>
-
-  <!-- ESPAÑOL -->
-  <div class="lang-es lang">
-    <div class="card">
-      <p class="title">❓ ¿Cuáles son los horarios de check-in y check-out?</p>
-      <p class="desc">
-        El check-in comienza desde las <strong>15:00</strong> y el check-out debe completarse antes de las <strong>11:00</strong>.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🪪 ¿Es obligatorio presentar documento?</p>
-      <p class="desc">
-        Sí. Es obligatorio presentar un documento válido con foto al hacer check-in.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🚗 ¿Cómo funciona el estacionamiento?</p>
-      <p class="desc">
-        Estacionamiento privado disponible. Use el espacio asignado y siga las indicaciones.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🌙 ¿Hay horario de silencio?</p>
-      <p class="desc">
-        Sí. Pedimos respeto al silencio, especialmente de <strong>22:00 a 08:00</strong>.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🚭 ¿Está permitido fumar?</p>
-      <p class="desc">
-        No. No se permite fumar dentro del apartamento ni en áreas internas.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- REGRAS / NORMAS -->
-<section id="regras" class="section">
-  <h2 class="font-serif">
-    <span class="lang-pt lang">Normas de Convivência</span>
-    <span class="lang-en lang">House Guidelines</span>
-    <span class="lang-es lang">Normas de Convivencia</span>
-  </h2>
-
-  <!-- PORTUGUÊS -->
-  <div class="lang-pt lang">
-    <p class="mb-4">
-      Para garantir uma experiência tranquila, confortável e harmoniosa para todos,
-      convidamos você a conhecer nossas normas de convivência.
-    </p>
-
-    <div class="card">
-      <p class="title">🕘 Check-in e Check-out</p>
-      <p class="desc">
-        Check-in a partir das <strong>15h</strong> e check-out até às <strong>11h</strong>.<br>
-        Caso precise chegar ou sair em horários diferentes, teremos prazer em flexibilizar sempre que possível.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🔐 Acesso ao apartamento</p>
-      <p class="desc">
-        A senha da porta é <strong>digital e exclusiva da sua estadia</strong>, enviada até
-        <strong>24 horas antes do check-in</strong>.<br>
-        O acesso ao prédio é feito por <strong>tag digital</strong> entregue no check-in.<br>
-        A portaria funciona <strong>24 horas</strong>.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🚗 Garagem</p>
-      <p class="desc">
-        O apartamento dispõe de <strong>1 vaga de garagem</strong>.<br>
-        Caso necessite utilizá-la, pedimos a gentileza de <strong>avisar com antecedência</strong>.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🐾 Animais de estimação</p>
-      <p class="desc">
-        <strong>Não é permitida a entrada de animais de estimação</strong>
-        no apartamento ou nas áreas do imóvel.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🚭 Fumar</p>
-      <p class="desc">
-        <strong>É proibido fumar</strong> dentro do apartamento e em qualquer área interna do imóvel.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🌙 Horário de silêncio</p>
-      <p class="desc">
-        Pedimos que seja respeitado o horário de silêncio das <strong>22h às 08h</strong>.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🛋️ Uso do espaço</p>
-      <p class="desc">
-        O apartamento deve ser utilizado apenas pelos hóspedes cadastrados.<br>
-        <strong>É expressamente proibido mover móveis, camas ou qualquer item do apartamento de lugar.</strong><br>
-        Ao sair, certifique-se de <strong>apagar as luzes e desligar os aparelhos de ar-condicionado</strong>.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">👥 Número máximo de hóspedes</p>
-      <p class="desc">
-        É permitido um máximo de <strong>6 hóspedes</strong> no apartamento,
-        conforme a reserva realizada.<br>
-        <strong>Não é permitida a entrada de visitantes ou hóspedes adicionais.</strong>
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">⚠️ Danos e taxas adicionais</p>
-      <p class="desc">
-        Serão cobradas <strong>taxas adicionais</strong> em caso de danos ou sujeiras permanentes,
-        incluindo manchas fixadas em toalhas ou lençóis, queimaduras de cigarro,
-        ou urina em colchões, sofás ou estofados em geral.
-      </p>
-    </div>
-  </div>
-
-  <!-- ENGLISH -->
-  <div class="lang-en lang">
-    <p class="mb-4">
-      To ensure a peaceful, comfortable and pleasant stay for everyone,
-      please review the house guidelines below.
-    </p>
-
-    <div class="card">
-      <p class="title">🕘 Check-in & Check-out</p>
-      <p class="desc">
-        Check-in from <strong>3:00 PM</strong> and check-out until <strong>11:00 AM</strong>.<br>
-        Early check-in or late check-out may be arranged when possible.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🔐 Apartment access</p>
-      <p class="desc">
-        The apartment uses a <strong>digital door code</strong>, exclusive to your stay,
-        sent up to <strong>24 hours before arrival</strong>.<br>
-        Building access is via a <strong>digital tag</strong> provided at check-in.<br>
-        Front desk operates <strong>24 hours</strong>.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🚗 Garage</p>
-      <p class="desc">
-        <strong>One parking space</strong> is available.<br>
-        Please inform us <strong>in advance</strong> if you wish to use it.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🐾 Pets</p>
-      <p class="desc">
-        <strong>Pets are not allowed</strong> in the apartment or building.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🚭 Smoking</p>
-      <p class="desc">
-        <strong>Smoking is strictly prohibited</strong> inside the apartment or any indoor area.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🌙 Quiet hours</p>
-      <p class="desc">
-        Quiet hours are from <strong>10:00 PM to 8:00 AM</strong>.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🛋️ Use of space</p>
-      <p class="desc">
-        The apartment is for registered guests only.<br>
-        <strong>Moving furniture, beds or any items from their original position is strictly prohibited.</strong><br>
-        Please <strong>turn off lights and air conditioning</strong> when leaving.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">👥 Maximum number of guests</p>
-      <p class="desc">
-        The apartment accommodates a maximum of <strong>6 guests</strong>,
-        as stated in the reservation.<br>
-        <strong>Additional guests or visitors are not allowed.</strong>
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">⚠️ Damages & extra fees</p>
-      <p class="desc">
-        <strong>Additional fees</strong> will be charged for permanent stains or damages,
-        including stained towels or linens, cigarette burns,
-        or urine on mattresses, sofas or upholstered furniture.
-      </p>
-    </div>
-  </div>
-
-  <!-- ESPAÑOL -->
-  <div class="lang-es lang">
-    <p class="mb-4">
-      Para garantizar una estancia tranquila, cómoda y agradable,
-      le invitamos a conocer las normas de convivencia.
-    </p>
-
-    <div class="card">
-      <p class="title">🕘 Check-in y Check-out</p>
-      <p class="desc">
-        Check-in a partir de las <strong>15:00</strong> y check-out hasta las <strong>11:00</strong>.<br>
-        La flexibilidad horaria es posible según disponibilidad.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🔐 Acceso al apartamento</p>
-      <p class="desc">
-        La puerta cuenta con <strong>cerradura digital</strong>, exclusiva para su estancia,
-        enviada hasta <strong>24 horas antes de la llegada</strong>.<br>
-        El acceso al edificio se realiza mediante <strong>tag digital</strong> entregado en el check-in.<br>
-        La portería funciona <strong>24 horas</strong>.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🚗 Garaje</p>
-      <p class="desc">
-        Hay disponible <strong>1 plaza de garaje</strong>.<br>
-        Por favor avise <strong>con antelación</strong> si necesita utilizarla.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🐾 Mascotas</p>
-      <p class="desc">
-        <strong>No se permiten mascotas</strong> en el apartamento ni en el edificio.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🚭 Fumar</p>
-      <p class="desc">
-        <strong>Está prohibido fumar</strong> dentro del apartamento y en áreas internas.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🌙 Horario de silencio</p>
-      <p class="desc">
-        El horario de silencio es de <strong>22:00 a 08:00</strong>.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">🛋️ Uso del espacio</p>
-      <p class="desc">
-        El apartamento es de uso exclusivo para los huéspedes registrados.<br>
-        <strong>Está estrictamente prohibido mover muebles, camas o cualquier objeto de su lugar original.</strong><br>
-        Al salir, asegúrese de <strong>apagar las luces y el aire acondicionado</strong>.
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">👥 Número máximo de huéspedes</p>
-      <p class="desc">
-        El apartamento permite un máximo de <strong>6 huéspedes</strong>,
-        según la reserva realizada.<br>
-        <strong>No se permiten visitantes ni huéspedes adicionales.</strong>
-      </p>
-    </div>
-
-    <div class="card">
-      <p class="title">⚠️ Daños y cargos adicionales</p>
-      <p class="desc">
-        Se aplicarán <strong>cargos adicionales</strong> por daños o suciedad permanente,
-        como manchas en toallas o sábanas, quemaduras de cigarrillos,
-        o orina en colchones, sofás o tapizados.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- SUPERMERCADOS -->
-<section id="supermercados" class="section">
-  <h2 class="font-serif">
-    <span class="lang-en lang">Supermarkets & Shops</span>
-    <span class="lang-pt lang">Supermercados e Lojas</span>
-    <span class="lang-es lang">Supermercados y Tiendas</span>
+<!-- TRANSPORTE -->
+<section id="transporte" class="section">
+  <h2>
+    <span class="lang-en lang">Transport</span>
+    <span class="lang-pt lang">Transporte</span>
+    <span class="lang-es lang">Transporte</span>
   </h2>
 
   <!-- EN -->
   <div class="lang-en lang">
-    <p class="mb-4">Supermarkets and shops near your stay in Icaraí, Niterói:</p>
-
-    <div class="card recommended">
-      <div class="flex-between">
-        <p class="title">Prezunic – Icaraí</p>
-        <span class="badge highlight">✔ Recommended</span>
-      </div>
-      <p class="desc">
-        Large and complete supermarket with groceries, fresh food, bakery and household items.
-      </p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Prezunic+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" class="btn-card">
-        View on Google Maps
-      </a>
-    </div>
-
-    <div class="card">
-      <div class="flex-between">
-        <p class="title">Real Supermercados</p>
-        <span class="badge">Nearby</span>
-      </div>
-      <p class="desc">Well-stocked supermarket for daily shopping.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Real+Supermercados+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" class="btn-card">
-        View on Google Maps
-      </a>
-    </div>
-
-    <div class="card">
-      <div class="flex-between">
-        <p class="title">SuperPrix – Icaraí</p>
-        <span class="badge">Nearby</span>
-      </div>
-      <p class="desc">Convenient local supermarket for quick purchases.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=SuperPrix+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" class="btn-card">
-        View on Google Maps
-      </a>
-    </div>
-
-    <div class="card">
-      <div class="flex-between">
-        <p class="title">Hortifruti</p>
-        <span class="badge">Nearby</span>
-      </div>
-      <p class="desc">Fresh fruits, vegetables and healthy food options.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Hortifruti+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" class="btn-card">
-        View on Google Maps
-      </a>
-    </div>
+    <p class="mb-4">Getting around Niterói is easy with ride-hailing apps, taxis, buses and ferry connections to Rio de Janeiro.</p>
+    <div class="card"><p class="title">🚗 Ride-hailing apps & Taxis</p><p class="desc"><strong>Uber</strong> and <strong>99</strong> operate normally throughout Niterói. Local taxis are also widely available, especially in Icaraí and nearby neighborhoods.</p></div>
+    <div class="card"><p class="title">🚌 Buses</p><p class="desc">Niterói has an extensive bus network connecting beaches, downtown, neighborhoods and the ferry terminal.</p></div>
+    <div class="card"><p class="title">⛴️ Ferry (Barca)</p><p class="desc">The ferry connects Niterói to Rio de Janeiro (Praça XV), offering a fast and scenic crossing of Guanabara Bay.</p></div>
+    <div class="card"><p class="title">✈️ Airports</p><p class="desc">The nearest airports are <strong>Santos Dumont (SDU)</strong> and <strong>Galeão – Tom Jobim (GIG)</strong>, both easily accessible by car or ferry.</p></div>
   </div>
 
   <!-- PT -->
   <div class="lang-pt lang">
-    <p class="mb-4">Supermercados e lojas próximos ao endereço em Icaraí, Niterói:</p>
-
-    <div class="card recommended">
-      <div class="flex-between">
-        <p class="title">Prezunic – Icaraí</p>
-        <span class="badge highlight">✔ Recomendado</span>
-      </div>
-      <p class="desc">
-        Supermercado grande e completo com alimentos, padaria, hortifruti e itens domésticos.
-      </p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Prezunic+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" class="btn-card">
-        Ver no Google Maps
-      </a>
-    </div>
-
-    <div class="card">
-      <div class="flex-between">
-        <p class="title">Real Supermercados</p>
-        <span class="badge">Próximo</span>
-      </div>
-      <p class="desc">Supermercado bem abastecido para compras do dia a dia.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Real+Supermercados+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" class="btn-card">
-        Ver no Google Maps
-      </a>
-    </div>
-
-    <div class="card">
-      <div class="flex-between">
-        <p class="title">SuperPrix – Icaraí</p>
-        <span class="badge">Próximo</span>
-      </div>
-      <p class="desc">Opção prática para compras rápidas.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=SuperPrix+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" class="btn-card">
-        Ver no Google Maps
-      </a>
-    </div>
-
-    <div class="card">
-      <div class="flex-between">
-        <p class="title">Hortifruti</p>
-        <span class="badge">Próximo</span>
-      </div>
-      <p class="desc">Frutas, legumes e produtos frescos.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Hortifruti+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" class="btn-card">
-        Ver no Google Maps
-      </a>
-    </div>
+    <p class="mb-4">A locomoção em Niterói é fácil com aplicativos de transporte, táxis, ônibus e a ligação por barca com o Rio de Janeiro.</p>
+    <div class="card"><p class="title">🚗 Aplicativos e Táxis</p><p class="desc"><strong>Uber</strong> e <strong>99</strong> funcionam normalmente em toda Niterói. Táxis também são facilmente encontrados, especialmente em Icaraí e região.</p></div>
+    <div class="card"><p class="title">🚌 Ônibus</p><p class="desc">A cidade possui ampla rede de ônibus ligando praias, bairros, centro da cidade e o terminal das barcas.</p></div>
+    <div class="card"><p class="title">⛴️ Barca</p><p class="desc">A barca faz a travessia entre Niterói e o Rio de Janeiro (Praça XV), sendo uma opção rápida e agradável.</p></div>
+    <div class="card"><p class="title">✈️ Aeroportos</p><p class="desc">Os aeroportos mais próximos são <strong>Santos Dumont (SDU)</strong> e <strong>Galeão – Tom Jobim (GIG)</strong>, com fácil acesso.</p></div>
   </div>
 
   <!-- ES -->
   <div class="lang-es lang">
-    <p class="mb-4">Supermercados y tiendas cerca del alojamiento en Icaraí, Niterói:</p>
-
-    <div class="card recommended">
-      <div class="flex-between">
-        <p class="title">Prezunic – Icaraí</p>
-        <span class="badge highlight">✔ Recomendado</span>
-      </div>
-      <p class="desc">
-        Supermercado grande y completo con alimentos, panadería y productos del hogar.
-      </p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Prezunic+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" class="btn-card">
-        Ver en Google Maps
-      </a>
-    </div>
-
-    <div class="card">
-      <div class="flex-between">
-        <p class="title">Real Supermercados</p>
-        <span class="badge">Cerca</span>
-      </div>
-      <p class="desc">Supermercado bien surtido para compras diarias.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Real+Supermercados+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" class="btn-card">
-        Ver en Google Maps
-      </a>
-    </div>
-
-    <div class="card">
-      <div class="flex-between">
-        <p class="title">SuperPrix – Icaraí</p>
-        <span class="badge">Cerca</span>
-      </div>
-      <p class="desc">Opción práctica para compras rápidas.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=SuperPrix+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" class="btn-card">
-        Ver en Google Maps
-      </a>
-    </div>
-
-    <div class="card">
-      <div class="flex-between">
-        <p class="title">Hortifruti</p>
-        <span class="badge">Cerca</span>
-      </div>
-      <p class="desc">Frutas, verduras y productos frescos.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Hortifruti+Icara%C3%AD+Niter%C3%B3i+RJ" target="_blank" class="btn-card">
-        Ver en Google Maps
-      </a>
-    </div>
+    <p class="mb-4">Moverse por Niterói es sencillo gracias a aplicaciones de transporte, taxis, autobuses y la conexión en ferry con Río de Janeiro.</p>
+    <div class="card"><p class="title">🚗 Aplicaciones y Taxis</p><p class="desc"><strong>Uber</strong> y <strong>99</strong> operan normalmente en toda la ciudad. Los taxis también son fáciles de encontrar, especialmente en Icaraí.</p></div>
+    <div class="card"><p class="title">🚌 Autobuses</p><p class="desc">Niterói cuenta con una amplia red de autobuses que conecta playas, barrios, el centro y la terminal del ferry.</p></div>
+    <div class="card"><p class="title">⛴️ Ferry</p><p class="desc">El ferry conecta Niterói con Río de Janeiro (Praça XV), ofreciendo un cruce rápido y con hermosas vistas.</p></div>
+    <div class="card"><p class="title">✈️ Aeropuertos</p><p class="desc">Los aeropuertos más cercanos son <strong>Santos Dumont (SDU)</strong> y <strong>Galeão – Tom Jobim (GIG)</strong>.</p></div>
   </div>
 </section>
 
-<!-- RESTAURANTES -->
-<section id="restaurantes" class="section">
-  <h2 class="font-serif">
-    <span class="lang-en lang">Restaurants</span>
-    <span class="lang-pt lang">Restaurantes</span>
-    <span class="lang-es lang">Restaurantes</span>
+<!-- AVALIAÇÃO -->
+<section id="avaliacao" class="section">
+  <h2>
+    <span class="lang-en lang">Reviews</span>
+    <span class="lang-pt lang">Avaliações</span>
+    <span class="lang-es lang">Reseñas</span>
   </h2>
 
   <!-- EN -->
-  <div class="lang-en lang">
-    <p class="mb-4">Recommended places near the apartment:</p>
-
-    <div class="card destaque-card">
-      <p class="title">Novo Ponto ★★★★★</p>
-      <p class="desc">Traditional Brazilian bar and restaurant, very popular with locals.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Novo+Ponto+Icaraí+Niterói" target="_blank" class="btn-card">View on Google Maps</a>
-    </div>
-
-    <div class="card destaque-card">
-      <p class="title">Malbec ★★★★★</p>
-      <p class="desc">Restaurant with a pleasant atmosphere and excellent food, on the same street as the apartment.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Malbec+Rua+Cinco+de+Julho+Icaraí+Niterói" target="_blank" class="btn-card">View on Google Maps</a>
-    </div>
-
-    <div class="card destaque-card">
-      <p class="title">Bibi Sucos ★★★★★</p>
-      <p class="desc">Great option for juices, snacks and quick meals.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Bibi+Sucos+Icaraí+Niterói" target="_blank" class="btn-card">View on Google Maps</a>
-    </div>
-
-    <div class="card destaque-card">
-      <p class="title">Bendito ★★★★★</p>
-      <p class="desc">Cool bar and restaurant in São Francisco, perfect for drinks and casual dining.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Bendito+São+Francisco+Niterói" target="_blank" class="btn-card">View on Google Maps</a>
-    </div>
+  <div class="lang-en lang text-center">
+    <p class="opacity-80 mb-4">Guests consistently highlight the excellent location, cleanliness, comfort and smooth check-in experience.</p>
+    <a href="https://www.airbnb.com.br/rooms/1556578639361187994?viralityEntryPoint=1&s=76" target="_blank" rel="noopener noreferrer" class="btn-accent" style="display:block;width:100%;">View reviews on Airbnb</a>
+    <p class="text-sm opacity-70 mt-4">Your feedback is very important to us!</p>
   </div>
 
   <!-- PT -->
-  <div class="lang-pt lang">
-    <p class="mb-4">Locais recomendados próximos ao apartamento:</p>
-
-    <div class="card destaque-card">
-      <p class="title">Novo Ponto ★★★★★</p>
-      <p class="desc">Bar e restaurante tradicional, muito frequentado pelos moradores da região.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Novo+Ponto+Icaraí+Niterói" target="_blank" class="btn-card">Ver no Google Maps</a>
-    </div>
-
-    <div class="card destaque-card">
-      <p class="title">Malbec ★★★★★</p>
-      <p class="desc">Restaurante com ótimo ambiente e excelente gastronomia, na mesma rua do apartamento.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Malbec+Rua+Cinco+de+Julho+Icaraí+Niterói" target="_blank" class="btn-card">Ver no Google Maps</a>
-    </div>
-
-    <div class="card destaque-card">
-      <p class="title">Bibi Sucos ★★★★★</p>
-      <p class="desc">Ótima opção para sucos naturais, lanches e refeições rápidas.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Bibi+Sucos+Icaraí+Niterói" target="_blank" class="btn-card">Ver no Google Maps</a>
-    </div>
-
-    <div class="card destaque-card">
-      <p class="title">Bendito ★★★★★</p>
-      <p class="desc">Bar e restaurante descolado em São Francisco, ideal para petiscos e drinks.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Bendito+São+Francisco+Niterói" target="_blank" class="btn-card">Ver no Google Maps</a>
-    </div>
+  <div class="lang-pt lang text-center">
+    <p class="opacity-80 mb-4">Os hóspedes destacam a excelente localização, limpeza, conforto e facilidade no check-in.</p>
+    <a href="https://www.airbnb.com.br/rooms/1556578639361187994?viralityEntryPoint=1&s=76" target="_blank" rel="noopener noreferrer" class="btn-accent" style="display:block;width:100%;">Ver avaliações no Airbnb</a>
+    <p class="text-sm opacity-70 mt-4">Sua avaliação é muito importante para nós!</p>
   </div>
 
   <!-- ES -->
-  <div class="lang-es lang">
-    <p class="mb-4">Lugares recomendados cerca del apartamento:</p>
-
-    <div class="card destaque-card">
-      <p class="title">Novo Ponto ★★★★★</p>
-      <p class="desc">Bar y restaurante tradicional, muy popular entre los locales.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Novo+Ponto+Icaraí+Niterói" target="_blank" class="btn-card">Ver en Google Maps</a>
-    </div>
-
-    <div class="card destaque-card">
-      <p class="title">Malbec ★★★★★</p>
-      <p class="desc">Restaurante con excelente ambiente, ubicado en la misma calle del apartamento.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Malbec+Rua+Cinco+de+Julho+Icaraí+Niterói" target="_blank" class="btn-card">Ver en Google Maps</a>
-    </div>
-
-    <div class="card destaque-card">
-      <p class="title">Bibi Sucos ★★★★★</p>
-      <p class="desc">Excelente opción para jugos naturales, snacks y comidas rápidas.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Bibi+Sucos+Icaraí+Niterói" target="_blank" class="btn-card">Ver en Google Maps</a>
-    </div>
-
-    <div class="card destaque-card">
-      <p class="title">Bendito ★★★★★</p>
-      <p class="desc">Bar y restaurante moderno en São Francisco, ideal para tapas y tragos.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Bendito+São+Francisco+Niterói" target="_blank" class="btn-card">Ver en Google Maps</a>
-    </div>
+  <div class="lang-es lang text-center">
+    <p class="opacity-80 mb-4">Los huéspedes destacan la excelente ubicación, limpieza, comodidad y facilidad en el check-in.</p>
+    <a href="https://www.airbnb.com.br/rooms/1556578639361187994?viralityEntryPoint=1&s=76" target="_blank" rel="noopener noreferrer" class="btn-accent" style="display:block;width:100%;">Ver reseñas en Airbnb</a>
+    <p class="text-sm opacity-70 mt-4">¡Tu reseña es muy importante para nosotros!</p>
   </div>
 </section>
 
-<!-- resto do arquivo (lugares, passeios, transporte, avaliacao, contato etc.) -->
-<!-- ... (esses blocos também tiveram acentos e emojis corrigidos no arquivo original acima) -->
-
-<!-- CONTATO / CONTACTO -->
+<!-- CONTATO -->
 <section id="contato" class="section">
-  <h2 class="font-serif">
+  <h2>
     <span class="lang-en lang">Contact</span>
     <span class="lang-pt lang">Contato</span>
     <span class="lang-es lang">Contacto</span>
@@ -1946,100 +1762,49 @@
 
   <!-- EN -->
   <div class="lang-en lang">
-    <p class="text-center opacity-90 mb-4">
-      We are available to help before, during and after your stay.
-    </p>
-
-    <!-- WhatsApp Helena -->
-    <a
-      href="https://wa.me/5521984047222"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="contact-link destaque-card"
-    >
+    <p class="text-center opacity-90 mb-4">We are available to help before, during and after your stay.</p>
+    <a href="https://wa.me/5521984047222" target="_blank" rel="noopener noreferrer" class="contact-link">
       <div class="contact-icon whatsapp">💬</div>
       <div>
         <p class="title">Helena – Host</p>
-        <p class="desc">
-          Reservations & guest support<br/>
-          Click to chat on WhatsApp
-        </p>
+        <p class="desc">Reservations & guest support<br/>Click to chat on WhatsApp</p>
       </div>
     </a>
-
     <div class="text-center mt-6 pt-6 border-t">
-      <p class="title">Address</p>
-      <p class="text-sm opacity-80 mt-4">
-        Rua Cinco de Julho, 215 / 1002<br/>
-        Icaraí – Niterói / RJ<br/>
-        Brazil
-      </p>
+      <p class="title" style="color: var(--muted);">Address</p>
+      <p class="text-sm opacity-80 mt-4">Rua Cinco de Julho, 215 / 1002<br/>Icaraí – Niterói / RJ<br/>Brazil</p>
     </div>
   </div>
 
   <!-- PT -->
   <div class="lang-pt lang">
-    <p class="text-center opacity-90 mb-4">
-      Estamos à disposição para ajudar antes, durante e após a sua estadia.
-    </p>
-
-    <!-- WhatsApp Helena -->
-    <a
-      href="https://wa.me/5521984047222"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="contact-link destaque-card"
-    >
+    <p class="text-center opacity-90 mb-4">Estamos à disposição para ajudar antes, durante e após a sua estadia.</p>
+    <a href="https://wa.me/5521984047222" target="_blank" rel="noopener noreferrer" class="contact-link">
       <div class="contact-icon whatsapp">💬</div>
       <div>
         <p class="title">Helena – Anfitriã</p>
-        <p class="desc">
-          Reservas e suporte aos hóspedes<br/>
-          Clique para falar no WhatsApp
-        </p>
+        <p class="desc">Reservas e suporte aos hóspedes<br/>Clique para falar no WhatsApp</p>
       </div>
     </a>
-
     <div class="text-center mt-6 pt-6 border-t">
-      <p class="title">Endereço</p>
-      <p class="text-sm opacity-80 mt-4">
-        Rua Cinco de Julho, 215 / 1002<br/>
-        Icaraí – Niterói / RJ<br/>
-        Brasil
-      </p>
+      <p class="title" style="color: var(--muted);">Endereço</p>
+      <p class="text-sm opacity-80 mt-4">Rua Cinco de Julho, 215 / 1002<br/>Icaraí – Niterói / RJ<br/>Brasil</p>
     </div>
   </div>
 
   <!-- ES -->
   <div class="lang-es lang">
-    <p class="text-center opacity-90 mb-4">
-      Estamos disponibles para ayudar antes, durante y después de su estancia.
-    </p>
-
-    <!-- WhatsApp Helena -->
-    <a
-      href="https://wa.me/5521984047222"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="contact-link destaque-card"
-    >
+    <p class="text-center opacity-90 mb-4">Estamos disponibles para ayudar antes, durante y después de su estancia.</p>
+    <a href="https://wa.me/5521984047222" target="_blank" rel="noopener noreferrer" class="contact-link">
       <div class="contact-icon whatsapp">💬</div>
       <div>
         <p class="title">Helena – Anfitriona</p>
-        <p class="desc">
-          Reservas y atención a los huéspedes<br/>
-          Haga clic para WhatsApp
-        </p>
+        <p class="desc">Reservas y atención a los huéspedes<br/>Haga clic para WhatsApp</p>
       </div>
     </a>
-
     <div class="text-center mt-6 pt-6 border-t">
-      <p class="title">Dirección</p>
-      <p class="text-sm opacity-80 mt-4">
-        Rua Cinco de Julho, 215 / 1002<br/>
-        Icaraí – Niterói / RJ<br/>
-        Brasil
-      </p>
+      <p class="title" style="color: var(--muted);">Dirección</p>
+      <p class="text-sm opacity-80 mt-4">Rua Cinco de Julho, 215 / 1002<br/>Icaraí – Niterói / RJ<br/>Brasil</p>
     </div>
   </div>
 </section>
@@ -2049,25 +1814,25 @@
     // Carousel
     (function(){
       const images = [
-    "https://i.imgur.com/E0AMBa4.jpeg",
-    "https://i.imgur.com/pGsj2Ax.jpeg",
-    "https://i.imgur.com/JkAHhya.jpeg",
-    "https://i.imgur.com/mvsc8zp.jpeg",
-    "https://i.imgur.com/Opjmq11.jpeg",
-    "https://i.imgur.com/qZQ4OrN.jpeg",
-    "https://i.imgur.com/VRE7oKn.jpeg",
-    "https://i.imgur.com/1kwd5bv.jpeg",
-    "https://i.imgur.com/jVoswL2.jpeg",
-    "https://i.imgur.com/xPUMFdQ.jpeg",
-    "https://i.imgur.com/DShzDAj.jpeg",
-    "https://i.imgur.com/bu5qiO1.jpeg",
-    "https://i.imgur.com/lBKQKgR.jpeg",
-    "https://i.imgur.com/4XB2pEC.jpeg",
-    "https://i.imgur.com/IZFhGpv.jpeg",
-    "https://i.imgur.com/XpJspPV.jpeg",
-    "https://i.imgur.com/HJwJSw7.jpeg",
-    "https://i.imgur.com/ubSyG3g.jpeg"
-  ];
+        "https://i.imgur.com/E0AMBa4.jpeg",
+        "https://i.imgur.com/pGsj2Ax.jpeg",
+        "https://i.imgur.com/JkAHhya.jpeg",
+        "https://i.imgur.com/mvsc8zp.jpeg",
+        "https://i.imgur.com/Opjmq11.jpeg",
+        "https://i.imgur.com/qZQ4OrN.jpeg",
+        "https://i.imgur.com/VRE7oKn.jpeg",
+        "https://i.imgur.com/1kwd5bv.jpeg",
+        "https://i.imgur.com/jVoswL2.jpeg",
+        "https://i.imgur.com/xPUMFdQ.jpeg",
+        "https://i.imgur.com/DShzDAj.jpeg",
+        "https://i.imgur.com/bu5qiO1.jpeg",
+        "https://i.imgur.com/lBKQKgR.jpeg",
+        "https://i.imgur.com/4XB2pEC.jpeg",
+        "https://i.imgur.com/IZFhGpv.jpeg",
+        "https://i.imgur.com/XpJspPV.jpeg",
+        "https://i.imgur.com/HJwJSw7.jpeg",
+        "https://i.imgur.com/ubSyG3g.jpeg"
+      ];
       let current = 0;
       const img = document.getElementById("carouselImage");
       if(!img) return;
@@ -2080,6 +1845,16 @@
         }, 400);
       }, 3500);
     })();
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 10) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
 
     // Menu open/close
     let menuOpen = false;
@@ -2116,26 +1891,21 @@
       window.scrollTo(0,0);
     }
 
-    // LANGUAGE HANDLING - strict separation (no mixed language shown)
-    const LANG_KEY = 'camboinhas_lang';
+    // LANGUAGE HANDLING
+    const LANG_KEY = 'refugio_icarai_lang';
     const defaultLang = (navigator.language && navigator.language.startsWith('pt')) ? 'pt' : ((navigator.language && navigator.language.startsWith('es')) ? 'es' : 'en');
 
     function setLang(lang) {
       if (!lang) return;
       try { localStorage.setItem(LANG_KEY, lang); } catch(e) {}
-      // Remove lang-active from all language blocks
       document.querySelectorAll('.lang').forEach(node => node.classList.remove('lang-active'));
-      // Add lang-active to only the chosen language blocks (select by .lang-en / .lang-pt / .lang-es)
       document.querySelectorAll('.lang-' + lang).forEach(node => node.classList.add('lang-active'));
-      // Update UI labels (header, menu items)
       updateSimpleLabels(lang);
-      // Update aria-pressed on buttons
       document.getElementById('btnEN').setAttribute('aria-pressed', String(lang === 'en'));
       document.getElementById('btnPT').setAttribute('aria-pressed', String(lang === 'pt'));
       document.getElementById('btnES').setAttribute('aria-pressed', String(lang === 'es'));
     }
 
-    // Map for UI-only labels (these are single elements, not multilingual blocks)
     const LABELS = {
       en: {
         headerTitle: 'Dear Guest',
@@ -2146,60 +1916,48 @@
           transporte: 'TRANSPORT', avaliacao: 'REVIEWS', contato: 'CONTACT'
         },
         contactBtn: 'CONTACT',
-        footer: 'Refúgio Icaraí © 2026',
-        mobileContact: 'CONTACT'
+        footer: 'Refúgio Icaraí © 2026'
       },
       pt: {
         headerTitle: 'Prezado Hóspede',
         menu: {
-          bemvindo: 'BEM-VINDO', direcao: 'INSTRUÇÕES DE DIREÇÃO', checkin: 'CHECK-IN / CHECK-OUT', wifi: 'WI-FI',
-          regras: 'REGRAS DA CASA', faq: 'PERGUNTAS FREQUENTES', supermercados: 'SUPERMERCADOS E LOJAS',
-          restaurantes: 'RESTAURANTES E CAFÉS', lugares: 'LUGARES PARA VISITAR', passeios: 'PASSEIOS E EXPERIÊNCIAS',
+          bemvindo: 'BEM-VINDO', direcao: 'INSTRUÇÕES', checkin: 'CHECK-IN / CHECK-OUT', wifi: 'WI-FI',
+          regras: 'REGRAS', faq: 'FAQ', supermercados: 'MERCADOS',
+          restaurantes: 'RESTAURANTES', lugares: 'LUGARES', passeios: 'PASSEIOS',
           transporte: 'TRANSPORTE', avaliacao: 'AVALIAÇÃO', contato: 'CONTATO'
         },
         contactBtn: 'CONTATO',
-        footer: 'Refúgio Icaraí © 2026',
-        mobileContact: 'CONTATO'
+        footer: 'Refúgio Icaraí © 2026'
       },
       es: {
         headerTitle: 'Estimado Huésped',
         menu: {
           bemvindo: 'BIENVENIDO', direcao: 'INDICACIONES', checkin: 'CHECK-IN / CHECK-OUT', wifi: 'WI-FI',
-          regras: 'NORMAS', faq: 'PREGUNTAS', supermercados: 'SUPERMERCADOS',
+          regras: 'NORMAS', faq: 'FAQ', supermercados: 'MERCADOS',
           restaurantes: 'RESTAURANTES', lugares: 'LUGARES', passeios: 'PASEOS',
           transporte: 'TRANSPORTE', avaliacao: 'RESEÑAS', contato: 'CONTACTO'
         },
         contactBtn: 'CONTACTO',
-        footer: 'Refúgio Icaraí © 2026',
-        mobileContact: 'CONTACTO'
+        footer: 'Refúgio Icaraí © 2026'
       }
     };
 
     function updateSimpleLabels(lang) {
       const map = LABELS[lang] || LABELS.en;
-      // Header title
       const headerTitle = document.getElementById('headerTitle');
       if (headerTitle) headerTitle.textContent = map.headerTitle;
-      // Menu labels
       document.querySelectorAll('.menu-label').forEach(node => {
         const btn = node.closest('.menu-item');
         if (!btn) return;
         const section = btn.getAttribute('data-section');
         if (section && map.menu[section]) node.textContent = map.menu[section];
       });
-      // Mobile menu labels
       document.querySelectorAll('.mobile-menu-item').forEach(btn => {
         const section = btn.getAttribute('data-section');
         const labelNode = btn.querySelector('.mobile-label');
         if (labelNode && section && map.menu[section]) labelNode.textContent = map.menu[section];
       });
-      // Contact labels and buttons
-      document.querySelectorAll('.contact-label').forEach(node => node.textContent = map.contactBtn || map.mobileContact);
-      document.querySelectorAll('.contact-btn').forEach(node => {
-        const span = node.querySelector('span');
-        if (span) span.textContent = map.contactBtn;
-      });
-      // Footer
+      document.querySelectorAll('.contact-label').forEach(node => node.textContent = map.contactBtn);
       const footer = document.getElementById('footerText');
       if (footer) footer.textContent = map.footer;
     }
@@ -2207,13 +1965,8 @@
     // Initialize on load
     (function init() {
       const stored = (function(){ try { return localStorage.getItem(LANG_KEY); } catch(e){ return null; } })() || defaultLang;
-      // Ensure language classes exist and hide others
-      // Page markup includes .lang-en, .lang-pt, .lang-es for each block.
-      // Activate stored/default language strictly (no mixing)
       setLang(stored);
-      // Set initial menu button behavior
       document.getElementById('menuBtn').onclick = toggleMenu;
-      // Ensure default section shown
       showSection('home');
     })();
   </script>
